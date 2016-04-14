@@ -10,20 +10,20 @@ The game can be broken down into several key components.
   1b. Resource gathering and possibly ship building? 
   
 2. The space exploration phase
-3. 
-  2a. procedural generation of sections of space with different events per square per map
 
-  2b. semi-randomized events to provide diversity of gameplay (not sure how many we want here, 15+?)
+  2a. Procedural generation of sections of space with different events per square per map
+
+  2b. Semi-randomized events to provide diversity of gameplay (not sure how many we want here, 15+?)
   
-    * a big question here is how many events do we want to include in a single game? 
+    **   A big question here is how many events do we want to include in a single game? 
     
-    **  I think we should try shooting for creating 2.5x the number of events so that you have to play
-        the game at least two + times without running seeing everything 
+    ***  I think we should try shooting for creating 2.5x the number of events so that you have to play
+         the game at least two + times without running seeing everything 
         
-    *** We might also want specific scripted events as well to contain whatever level of story 
-        we're going to try to implement. 
+    **** We might also want specific scripted events as well to contain whatever level of story 
+         we're going to try to implement. 
         
-  2c. survival aspects that place greater emphasis on resource management and choices in events
+  2c. Survival aspects that place greater emphasis on resource management and choices in events
   
 3. The ending of the game. (15-25 minutes)
 
@@ -37,8 +37,11 @@ The game can be broken down into several key components.
 INTRODUCTION
 
 We'll need to decide how to implement the starting points of the game. 
+
   Just a series of text choices? 
+  
   A small map to introduce movement and how the game will work (a tutorial of sorts)?
+  
   How important do we want the introduction to be for the rest of the game? 
 
 MAP MAKING
@@ -56,6 +59,7 @@ etc.) it should be pretty straight forward to create them (or make an event gene
 RESOURCES/KEY ITEMS/ITEMS(?)
 
 What we resources do we want to implement/require (fuel, food, mental_health, etc.)?
+
 What key (or regular) items do we want (maps of a galaxies? cook books? ship upgrades? robots?)
 
 STORAGE/LOGISTICS
