@@ -21,26 +21,31 @@ The game can be broken down into several key components.
   3c. You landed on a paradise planet and decide to stay there (or stopped happily along the way)
   
 INTRODUCTION
+
 We'll need to decide how to implement the starting points of the game. 
   Just a series of text choices? 
   A small map to introduce movement and how the game will work (a tutorial of sorts)?
   How important do we want the introduction to be for the rest of the game? 
 
 MAP MAKING
+
 The major chunk of the work is thus in developing the code for the maps, such that they work both functionally
 and visually to give the player a sense of depth. This will require some algorithmic determination of the map
 if we want it to be random/semi-random. 
 
 EVENT GENERATION
+
 Event generation is going to take a good amount of thinking but once the code for incorporating them and their important facets
 (such as what resources you get or lose based on how the event turns out, at what point you encounter it, how to determine choices, 
 etc.) it should be pretty straight forward to create them (or make an event generation program). 
   
 RESOURCES/KEY ITEMS/ITEMS(?)
+
 What we resources do we want to implement/require (fuel, food, mental_health, etc.)?
 What key (or regular) items do we want (maps of a galaxies? cook books? ship upgrades? robots?)
 
 STORAGE/LOGISTICS
+
 The next chunk is figuring out how to set up the events both in their storage and implementation. Pickling/shelving 
 might work really well here so that we don't need to worry about having all the events stored in the python file itself. 
 What might also prove really useful is if we can create python files with all the important classes and functions and keep 
