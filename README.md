@@ -15,13 +15,13 @@ The game can be broken down into several key components.
 
   2b. Semi-randomized events to provide diversity of gameplay (not sure how many we want here, 15+?)
   
-    **   A big question here is how many events do we want to include in a single game? 
+        **   A big question here is how many events do we want to include in a single game? 
     
-    ***  I think we should try shooting for creating 2.5x the number of events so that you have to play
-         the game at least two + times without running seeing everything 
+        ***  I think we should try shooting for creating 2.5x the number of events so that you have to play
+             the game at least two + times without running seeing everything 
         
-    **** We might also want specific scripted events as well to contain whatever level of story 
-         we're going to try to implement. 
+        **** We might also want specific scripted events as well to contain whatever level of story 
+             we're going to try to implement. 
         
   2c. Survival aspects that place greater emphasis on resource management and choices in events
   
