@@ -6,8 +6,6 @@ class Map(object):
         self.sizeY = sizeY
         self.charSym = charSym
         self.position = [startPosY,startPosX]
-        self.charY = startPosY
-        self.charX = startPosX
 
         ## create empty list
         self.grid = []
@@ -17,8 +15,10 @@ class Map(object):
             for y in range(self.sizeY): ## for the num of times perscribed by sizeY
                 x.append("_") ##add char sizeY times to the sub list within x
                 
-    def charPosition(self):
-        self.grid[self.position[0]][self.position[1]] = self.charSym
+    def charPosition(self, position = None):
+        if position == None:
+            position = self.position
+        self.grid[position[0]][position[1]] = self.charSym
     
     def displayMap(self):
         for x in range (self.sizeX):
@@ -27,6 +27,7 @@ class Map(object):
             print()
             
     def populateTiles(self, numTiles):
+        """Creates numbered tiles at random."""
         import random
         
         for tile in range(numTiles):
@@ -41,9 +42,9 @@ class Map(object):
             return False
         else:
             return True
-        
+
     def changeTile(self, position, tile="t"):
-        """Change specific tile (Y, X, tile) """
+        """Change specific tile (position[Y,X], tile character) """
         if self.isValid(position):
             self.grid[int(position[0])][int(position[1])] = tile
         else:
@@ -54,36 +55,38 @@ class Map(object):
     ## move functions
     def move_up(self):
         self.position[0] -= 1
-        #return self.position
 
     def move_down(self):
         self.position[0] += 1
-        #return self.position
 
     def move_left(self):
         self.position[1] -= 1
-        #return self.position
 
     def move_right(self):
         self.position[1] += 1
-        #return self.position
 
     def movement(self):
-        ##{"1":"Up", "2":"Right","3":"Left","4":"Down"}
-        moves = {}
+        ## dictionary of move_ functions
         moves = {"1":self.move_up, "2":self.move_right, "3":self.move_left, "4":self.move_down}
+
+        ## create list of dictionary keys for cleaner code when checking their validity
         movesList = []
         for move in moves:
-            movesList.append(move)        
-        tempMoveMenu = "\nChoose a movement: \n\t1.Up\n\t2.Right\n\t3.Left\n\t4.Down\n"
+            movesList.append(move)
+            
+        moveMenu = "\nChoose a movement: \n\t1.Up\n\t2.Right\n\t3.Left\n\t4.Down\n"
 
+        ## clears out original tile and replaces it with a blank
         self.changeTile(self.position, "_")
+
         validMove = False 
         move = None
 
-        while not validMove: 
+        while not validMove:
+            ## might move this outside of movement method to provide ways of ending movement/more options
             while move not in movesList:
-                move = str(input(tempMoveMenu))
+                move = str(input(moveMenu))
+            ## Uses functions stored in dictionary.
             moves[move]()
             if self.isValid(self.position):
                 validMove = True
@@ -112,11 +115,7 @@ def main():
 
     print()
 
-    '''
-    inputYX = [0,0]
-    inputYX[1] = int(input("Give me an x coordinate on the map to change\n"))
-    inputYX[0] = int(input("Give me an y coordinate on the map to change\n"))
-    '''
+    ## tester program with inputting a specific tile in at a specific spot and for the movement. 
     map1.changeTile([2,2], "t")
     for i in range(10):
         map1.movement()
