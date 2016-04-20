@@ -31,20 +31,22 @@ class Map(object):
             randomY = random.randrange(self.sizeY)
             self.grid[randomX][randomY] = str(tile)
 
-    def changeTile(self, posY, posX, tile="t"):
-        """Change specific tile (Y, X, tile) """
-        if self.isValid(posY, posX):
-            self.grid[posY][posX] = tile
-        else:
-            print("Not a valid position on the map")
-            
-    def isValid(self, posY, posX):
-        if posY < 0 or posX < 0:
+    def isValid(self, position):
+        if position[0] < 0 or position[1] < 0:
             return False
-        elif posY >= self.sizeY or posX >= self.sizeX:
+        elif position[0] >= self.sizeY or position[1] >= self.sizeX:
             return False
         else:
             return True
+        
+    def changeTile(self, position, tile="t"):
+        """Change specific tile (Y, X, tile) """
+        if self.isValid(position):
+            self.grid[position[0]][position[1]] = tile
+        else:
+            print("Not a valid position on the map")
+            
+    
 
     ## move functions
     def move_up(self):
@@ -65,37 +67,46 @@ class Map(object):
 
     def movement(self):
         ##{"1":"Up", "2":"Right","3":"Left","4":"Down"}
-        self.moves = {"1":self.move_up(), "2":self.move_right(), "3":self.move_left(), "4":self.move_down()}
+        moves = {}
+        moves = {"1":self.move_up(), "2":self.move_right(), "3":self.move_left(), "4":self.move_down()}
         movesList = []
         for move in moves:
             movesList.append(move)
-            
+
+        print(moves["5"])
         tempMoveMenu = "Choose a movement: \n\t1.Up\n\t2.Right\n\t3.Left\n\t4.Down\n"
 
         validMove = False 
 
-        movement = None
+        move = None
         while not validMove: 
-            while movement not in self.movesList:
-                movement = input(tempMoveMenu)
-            self.moves[movement]
-            possibleMove = self.position
-            if self.isValid():
-                self.moves[movement]
+            while move not in movesList:
+                move = input(tempMoveMenu)
+            moves[move]
+            print(self.position)
+            print(moves)
+            if self.isValid(self.position):
+                validMove = True
+
+        self.changeTile(self.position, self.charSym)
        
             
 def main():
     map1 = Map(10, 10)
     
     map1.populateTiles(5)
-    map1.displayMap()
+    #map1.displayMap()
 
     print()
 
-    inputX = int(input("Give me an x coordinate on the map to change\n"))
-    inputY = int(input("Give me an y coordinate on the map to change\n"))
-
-    map1.changeTile(inputY, inputX, "S")
+    '''
+    inputYX = [0,0]
+    inputYX[1] = int(input("Give me an x coordinate on the map to change\n"))
+    inputYX[0] = int(input("Give me an y coordinate on the map to change\n"))
+    '''
+    map1.changeTile([0,0], "S")
+    map1.movement()
+    
     map1.displayMap()
     
 
