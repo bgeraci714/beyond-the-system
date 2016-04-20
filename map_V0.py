@@ -74,14 +74,13 @@ class Map(object):
         moves = {"1":self.move_up, "2":self.move_right, "3":self.move_left, "4":self.move_down}
         movesList = []
         for move in moves:
-            movesList.append(move)
+            movesList.append(move)        
+        tempMoveMenu = "\nChoose a movement: \n\t1.Up\n\t2.Right\n\t3.Left\n\t4.Down\n"
 
-        
-        tempMoveMenu = "Choose a movement: \n\t1.Up\n\t2.Right\n\t3.Left\n\t4.Down\n"
-
+        self.changeTile(self.position, "_")
         validMove = False 
-
         move = None
+
         while not validMove: 
             while move not in movesList:
                 move = str(input(tempMoveMenu))
@@ -89,6 +88,18 @@ class Map(object):
             if self.isValid(self.position):
                 validMove = True
             else:
+                ## undo invalid move
+                if move == "1":
+                    moves["4"]()
+                elif move == "2":
+                    moves["3"]()
+                elif move == "3":
+                    moves["2"]()
+                elif move == "4":
+                    moves["1"]()
+                else:
+                    print("An error occurred\ns")
+                ## return move back to None type
                 move = None
         self.changeTile(self.position, self.charSym)
        
