@@ -16,6 +16,9 @@ class Map(object):
         for x in self.grid: ## for each empty list
             for y in range(self.sizeY): ## for the num of times perscribed by sizeY
                 x.append("_") ##add char sizeY times to the sub list within x
+                
+    def charPosition(self):
+        self.grid[self.position[0]][self.position[1]] = self.charSym
     
     def displayMap(self):
         for x in range (self.sizeX):
@@ -42,7 +45,7 @@ class Map(object):
     def changeTile(self, position, tile="t"):
         """Change specific tile (Y, X, tile) """
         if self.isValid(position):
-            self.grid[position[0]][position[1]] = tile
+            self.grid[int(position[0])][int(position[1])] = tile
         else:
             print("Not a valid position on the map")
             
@@ -81,19 +84,20 @@ class Map(object):
         move = None
         while not validMove: 
             while move not in movesList:
-                move = input(tempMoveMenu)
+                move = str(input(tempMoveMenu))
             moves[move]()
             if self.isValid(self.position):
                 validMove = True
-        #self.move_right()
+            else:
+                move = None
         self.changeTile(self.position, self.charSym)
        
             
 def main():
     map1 = Map(10, 10)
-    
+    map1.charPosition()
     map1.populateTiles(5)
-    #map1.displayMap()
+    map1.displayMap()
 
     print()
 
@@ -102,10 +106,10 @@ def main():
     inputYX[1] = int(input("Give me an x coordinate on the map to change\n"))
     inputYX[0] = int(input("Give me an y coordinate on the map to change\n"))
     '''
-    map1.changeTile([2,2], "S")
-    map1.movement()
-    
-    map1.displayMap()
+    map1.changeTile([2,2], "t")
+    for i in range(10):
+        map1.movement()
+        map1.displayMap()
     
 
 main()
