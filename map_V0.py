@@ -12,6 +12,14 @@ class Map(object):
         for x in self.grid: ## for each empty list
             for y in range(self.sizeY): ## for the num of times perscribed by sizeY
                 x.append("_") ##add char sizeY times to the sub list within x
+
+    def isValid(self, posY, posX):
+        if posY < 0 or posX < 0:
+            return False
+        elif posY >= self.sizeY or posX >= self.sizeX:
+            return False
+        else:
+            return True
     
     def displayMap(self):
         for x in range (self.sizeX):
@@ -28,7 +36,10 @@ class Map(object):
 
     def changeTile (self, posY, posX, tile="t"):
         """Change specific tile (Y, X, tile) """
-        self.grid[posY][posX] = tile
+        if self.isValid(posY, posX):
+            self.grid[posY][posX] = tile
+        else:
+            print("Not a valid position on the map")
     
             
 def main():
@@ -39,7 +50,10 @@ def main():
 
     print()
 
-    map1.changeTile(0, 3, "E")
+    inputX = int(input("Give me an x coordinate on the map to change\n"))
+    inputY = int(input("Give me an y coordinate on the map to change\n"))
+
+    map1.changeTile(inputY, inputX, "S")
     map1.displayMap()
     
 
