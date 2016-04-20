@@ -1,6 +1,6 @@
 class Map(object):
     """Creates map object (length, height)"""
-    def __init__(self, sizeY, sizeX, charSym = "S", startPosY = 0, startPosX = 0):
+    def __init__(self, sizeY, sizeX, charSym = "S", startPosY = 9, startPosX = 5):
         
         self.sizeX = sizeX
         self.sizeY = sizeY
@@ -55,15 +55,19 @@ class Map(object):
     ## move functions
     def move_up(self):
         self.position[0] -= 1
+        self.charSym = "^"
 
     def move_down(self):
         self.position[0] += 1
+        self.charSym = "v"
 
     def move_left(self):
         self.position[1] -= 1
+        self.charSym = "<"
 
     def move_right(self):
         self.position[1] += 1
+        self.charSym = ">"
 
     def movement(self):
         ## dictionary of move_ functions
@@ -108,7 +112,7 @@ class Map(object):
        
             
 def main():
-    map1 = Map(10, 10)
+    map1 = Map(10, 10, "^")
     map1.charPosition()
     map1.populateTiles(5)
     map1.displayMap()
