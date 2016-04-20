@@ -68,12 +68,12 @@ class Map(object):
     def movement(self):
         ##{"1":"Up", "2":"Right","3":"Left","4":"Down"}
         moves = {}
-        moves = {"1":self.move_up(), "2":self.move_right(), "3":self.move_left(), "4":self.move_down()}
+        moves = {"1":self.move_up, "2":self.move_right, "3":self.move_left, "4":self.move_down}
         movesList = []
         for move in moves:
             movesList.append(move)
 
-        print(moves["5"])
+        
         tempMoveMenu = "Choose a movement: \n\t1.Up\n\t2.Right\n\t3.Left\n\t4.Down\n"
 
         validMove = False 
@@ -82,12 +82,10 @@ class Map(object):
         while not validMove: 
             while move not in movesList:
                 move = input(tempMoveMenu)
-            moves[move]
-            print(self.position)
-            print(moves)
+            moves[move]()
             if self.isValid(self.position):
                 validMove = True
-
+        #self.move_right()
         self.changeTile(self.position, self.charSym)
        
             
@@ -104,7 +102,7 @@ def main():
     inputYX[1] = int(input("Give me an x coordinate on the map to change\n"))
     inputYX[0] = int(input("Give me an y coordinate on the map to change\n"))
     '''
-    map1.changeTile([0,0], "S")
+    map1.changeTile([2,2], "S")
     map1.movement()
     
     map1.displayMap()
