@@ -71,14 +71,14 @@ class Map(object):
 
     def movement(self):
         ## dictionary of move_ functions
-        moves = {"1":self.move_up, "2":self.move_right, "3":self.move_left, "4":self.move_down}
+        moves = {"1":self.move_up, "2":self.move_down, "3":self.move_left, "4":self.move_right}
 
         ## create list of dictionary keys for cleaner code when checking their validity
         movesList = []
         for move in moves:
             movesList.append(move)
             
-        moveMenu = "\nChoose a movement: \n1.Up\n2.Right\n3.Left\n4.Down\n"
+        moveMenu = "\nChoose a movement: \n1.Up\n2.Down\n3.Left\n4.Right\n"
 
         ## clears out original tile and replaces it with a blank
         self.changeTile(self.position, "_")
@@ -97,13 +97,13 @@ class Map(object):
             else:
                 ## undo invalid move
                 if move == "1":
-                    moves["4"]()
-                elif move == "2":
-                    moves["3"]()
-                elif move == "3":
                     moves["2"]()
-                elif move == "4":
+                elif move == "2":
                     moves["1"]()
+                elif move == "3":
+                    moves["4"]()
+                elif move == "4":
+                    moves["3"]()
                 else:
                     print("An error occurred\ns")
                 ## return move back to None type
