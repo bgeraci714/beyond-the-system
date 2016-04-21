@@ -38,4 +38,8 @@ class Ship(object):
         r += "HP: " + str(self.getHP()) + "\n"
         r += "Fuel: " + str(self.getfuel())
         return r
+        
+    #Update Log
+    def updatelog(self, eventdeetz):
+        self.__log.append(eventdeetz)
 
