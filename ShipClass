@@ -2,11 +2,13 @@
 
 class Ship(object):
     #Define init
-    def __init__(self, name, biomass, HP, fuel):
+    def __init__(self, name, biomass, HP, fuel, log, inventory):
         self.__name = name
         self.__biomass = biomass
         self.__HP = HP
         self.__fuel = fuel
+        self.__log = []
+        self.__inventory = []
 
     #Ship Getters
     def getname(self):
@@ -37,6 +39,3 @@ class Ship(object):
         r += "Fuel: " + str(self.getfuel())
         return r
 
-    #Ship Log
-    def shiplog(self):
-        shiplog = []
