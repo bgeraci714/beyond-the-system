@@ -78,7 +78,7 @@ class Map(object):
         for move in moves:
             movesList.append(move)
             
-        moveMenu = "\nChoose a movement: \n\t1.Up\n\t2.Right\n\t3.Left\n\t4.Down\n"
+        moveMenu = "\nChoose a movement: \n1.Up\n2.Right\n3.Left\n4.Down\n"
 
         ## clears out original tile and replaces it with a blank
         self.changeTile(self.position, "_")
