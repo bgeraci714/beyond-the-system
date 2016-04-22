@@ -1,19 +1,19 @@
 class Map(object):
-    """Creates map object (length, height)"""
-    def __init__(self, sizeY, sizeX, charSym = "S", startPosY = 9, startPosX = 5):
+    """Creates map object (rows, cols, charSymbol, starting row, starting column)"""
+    def __init__(self, numRows, numCols, charSym = "S", startRow = 9, startCol = 5):
         
-        self.sizeX = sizeX
-        self.sizeY = sizeY
+        self.numCols = numCols
+        self.numRows = numRows
         self.charSym = charSym
-        self.position = [startPosY,startPosX]
+        self.position = [startRow,startCol]
 
         ## create empty list
         self.grid = []
-        for x in range(self.sizeX): ##append empty list sizeX times to grid
+        for row in range(self.numRows): ##append empty list numCols times to grid
             self.grid.append([])
-        for x in self.grid: ## for each empty list
-            for y in range(self.sizeY): ## for the num of times perscribed by sizeY
-                x.append("_") ##add char sizeY times to the sub list within x
+        for row in self.grid: ## for each empty list
+            for col in range(self.numCols): ## for the num of times perscribed by numRows
+                row.append("_") ##add char sizeY times to the sub list within row
                 
     def charPosition(self, position = None):
         if position == None:
@@ -21,9 +21,9 @@ class Map(object):
         self.grid[position[0]][position[1]] = self.charSym
     
     def displayMap(self):
-        for x in range (self.sizeX):
-            for y in range (self.sizeY):
-                print(self.grid[x][y], end=" ")
+        for row in range (self.numRows):
+            for col in range (self.numCols):
+                print(self.grid[row][col], end=" ")
             print()
             
     def populateTiles(self, numTiles):
@@ -31,20 +31,20 @@ class Map(object):
         import random
         
         for tile in range(numTiles):
-            randomX = random.randrange(self.sizeX)
-            randomY = random.randrange(self.sizeY)
-            self.grid[randomX][randomY] = str(tile)
+            randomCol = random.randrange(self.numCols)
+            randomRow = random.randrange(self.numRows)
+            self.grid[randomRow][randomCol] = str(tile)
 
     def isValid(self, position):
         if position[0] < 0 or position[1] < 0:
             return False
-        elif position[0] >= self.sizeY or position[1] >= self.sizeX:
+        elif position[0] >= self.numRows or position[1] >= self.numCols:
             return False
         else:
             return True
 
     def changeTile(self, position, tile="t"):
-        """Change specific tile (position[Y,X], tile character) """
+        """Change specific tile (position[row,col], tile character) """
         if self.isValid(position):
             self.grid[int(position[0])][int(position[1])] = tile
         else:
@@ -112,7 +112,7 @@ class Map(object):
        
             
 def main():
-    map1 = Map(10, 10, "^")
+    map1 = Map(20, 10, "^", 15, 0)
     map1.charPosition()
     map1.populateTiles(5)
     map1.displayMap()
