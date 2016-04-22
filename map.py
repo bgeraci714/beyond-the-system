@@ -1,5 +1,7 @@
 class Map(object):
     """Creates map object (rows, cols, charSymbol, starting row, starting column)"""
+    tileList = []
+
     def __init__(self, numRows, numCols, charSym = "S", startRow = 9, startCol = 5):
         
         self.numCols = numCols
@@ -29,11 +31,24 @@ class Map(object):
     def populateTiles(self, numTiles):
         """Creates numbered tiles at random."""
         import random
-        
+        usedTileLocations = []
         for tile in range(numTiles):
+            
             randomCol = random.randrange(self.numCols)
             randomRow = random.randrange(self.numRows)
+
+            ## checks to make sure we don't populate a tile containing our ship
+            while [randomRow, randomCol] == self.position or [randomRow,randomCol] in usedTileLocations:
+                randomCol = random.randrange(self.numCols)
+                randomRow = random.randrange(self.numRows)
+
+            ## add to list of already used tile locations    
+            usedTileLocations.append([randomRow,randomCol])
+            
             self.grid[randomRow][randomCol] = str(tile)
+            
+            tileInfo = [tile, [randomRow, randomCol]]
+            Map.tileList.append(tileInfo)
 
     def isValid(self, position):
         if position[0] < 0 or position[1] < 0:
@@ -94,6 +109,14 @@ class Map(object):
             moves[move]()
             if self.isValid(self.position):
                 validMove = True
+                
+                ## COLLISION TESTING!!! MIGHT WANT TO MAKE A SEPARATE FUNCTION
+                for i in Map.tileList:
+                    if self.position == i[1]:
+                        Map.tileList.pop(Map.tileList.index(i))
+                        ## testing to see if we can interact with the tile list as intended
+                        print("You hit tile number " + str(i[0]))
+                
             else:
                 ## undo invalid move
                 if move == "1":
@@ -112,18 +135,21 @@ class Map(object):
        
             
 def main():
-    map1 = Map(20, 10, "^", 15, 0)
+    map1 = Map(5, 5, "^", 0, 0)
     map1.charPosition()
     map1.populateTiles(5)
     map1.displayMap()
+    print(Map.tileList)
 
     print()
 
     ## tester program with inputting a specific tile in at a specific spot and for the movement. 
-    map1.changeTile([2,2], "t")
+    
+    ## map1.changeTile([2,3], "T")
     for i in range(10):
         map1.movement()
         map1.displayMap()
+        
     
 
 main()
