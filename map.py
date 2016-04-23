@@ -2,12 +2,12 @@ class Map(object):
     """Creates map object (rows, cols, charSymbol, starting row, starting column)"""
     tileList = []
 
-    def __init__(self, numRows, numCols, charSym = "S", startRow = 9, startCol = 5):
-        
+    def __init__(self, numRows, numCols, charSym = "S", startRow = 9, startCol = 5, blankTile = "_"):
         self.numCols = numCols
         self.numRows = numRows
         self.charSym = charSym
         self.position = [startRow,startCol]
+        self.blankTile = blankTile
 
         ## create empty list
         self.grid = []
@@ -15,23 +15,31 @@ class Map(object):
             self.grid.append([])
         for row in self.grid: ## for each empty list
             for col in range(self.numCols): ## for the num of times perscribed by numRows
-                row.append("_") ##add char sizeY times to the sub list within row
-                
-    def charPosition(self, position = None):
+                row.append(self.blankTile) ##add char sizeY times to the sub list within row
+
+        ## experiment
+        for row in range(self.numRows): ## for each empty list
+            for col in range(self.numCols): ## for the num of times perscribed by numRows
+                self.grid[row][col] = " "
+        
+    def setCharPosition(self, position = None):
         if position == None:
             position = self.position
         self.grid[position[0]][position[1]] = self.charSym
     
     def displayMap(self):
+        print (" "+"W" * 2 * self.numCols)
         for row in range (self.numRows):
+            print("|", end="")
             for col in range (self.numCols):
                 print(self.grid[row][col], end=" ")
-            print()
-            
+            print("|")
+        print (" "+"W" * 2 * self.numCols)           
     def populateTiles(self, numTiles):
         """Creates numbered tiles at random."""
         import random
         usedTileLocations = []
+        
         for tile in range(numTiles):
             
             randomCol = random.randrange(self.numCols)
@@ -86,22 +94,25 @@ class Map(object):
 
     def movement(self):
         ## dictionary of move_ functions
-        moves = {"1":self.move_up, "2":self.move_down, "3":self.move_left, "4":self.move_right}
+        moves = {"w":self.move_up, "s":self.move_down, "a":self.move_left, "d":self.move_right}
 
         ## create list of dictionary keys for cleaner code when checking their validity
         movesList = []
         for move in moves:
             movesList.append(move)
             
-        moveMenu = "\nChoose a movement: \n1.Up\n2.Down\n3.Left\n4.Right\n"
+        moveMenu = "\nChoose a movement: \nw.Up\na.Left\ns.Down\nd.Right\n"
 
         ## clears out original tile and replaces it with a blank
-        self.changeTile(self.position, "_")
-
+        
+        self.changeTile(self.position, self.blankTile)
+        
+        
         validMove = False 
         move = None
 
         while not validMove:
+            originalPosition = self.position[:]
             ## might move this outside of movement method to provide ways of ending movement/more options
             while move not in movesList:
                 move = str(input(moveMenu))
@@ -109,37 +120,29 @@ class Map(object):
             moves[move]()
             if self.isValid(self.position):
                 validMove = True
-                
+        
                 ## COLLISION TESTING!!! MIGHT WANT TO MAKE A SEPARATE FUNCTION
-                for i in Map.tileList:
-                    if self.position == i[1]:
-                        Map.tileList.pop(Map.tileList.index(i))
+                for tile in Map.tileList:
+                    if self.position == tile[1]:
+                        Map.tileList.pop(Map.tileList.index(tile))
                         ## testing to see if we can interact with the tile list as intended
-                        print("You hit tile number " + str(i[0]))
-                
-            else:
-                ## undo invalid move
-                if move == "1":
-                    moves["2"]()
-                elif move == "2":
-                    moves["1"]()
-                elif move == "3":
-                    moves["4"]()
-                elif move == "4":
-                    moves["3"]()
-                else:
-                    print("An error occurred\ns")
-                ## return move back to None type
+                        print("You hit tile number " + str(tile[0]) + "!")
+            elif not self.isValid(self.position):
+                print(originalPosition)
+                self.position = originalPosition
                 move = None
+            else:
+                printf("An error occurred!")
+            
         self.changeTile(self.position, self.charSym)
        
             
 def main():
-    map1 = Map(5, 5, "^", 0, 0)
-    map1.charPosition()
+    map1 = Map(10,10, "^", 5, 5, ".")
+    map1.setCharPosition()
     map1.populateTiles(5)
     map1.displayMap()
-    print(Map.tileList)
+    #print(Map.tileList)
 
     print()
 
