@@ -127,8 +127,11 @@ class Map(object):
                         Map.tileList.pop(Map.tileList.index(tile))
                         ## testing to see if we can interact with the tile list as intended
                         print("You hit tile number " + str(tile[0]) + "!")
+                        ## Eric needs
+                        ## Return if event is false, 0
+                        ## Else, return event num 
             elif not self.isValid(self.position):
-                print(originalPosition)
+                ##print(originalPosition)
                 self.position = originalPosition
                 move = None
             else:
