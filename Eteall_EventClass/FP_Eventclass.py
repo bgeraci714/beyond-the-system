@@ -160,8 +160,8 @@ class Event (object):
 
 
 ## These lines were for testing
-#example = Event('example', 2)
-#example.runEvent()
+example = Event('example', 2)
+example.runEvent()
 
         
     
