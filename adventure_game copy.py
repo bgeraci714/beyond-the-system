@@ -1,5 +1,10 @@
+## Blake Geraci
+## Chapter 9: Challenge 4
+## Create a simple adventure game where a player can travel between
+## various connected locations. 
+
 class Map(object):
-    """Creates map object (rows, cols, charSymbol, starting row, starting column)"""
+    """Creates map object."""
     
 
     def __init__(self, numRows, numCols, charSym = "S", startRow = 9, startCol = 5, blankTile = "_"):
@@ -8,7 +13,9 @@ class Map(object):
         self.charSym = charSym
         self.position = [startRow,startCol]
         self.blankTile = blankTile
+        self.foundDoor = False
         self.tileList = []
+        self.blockedTiles = []
 
         ## create empty list
         self.grid = []
@@ -22,24 +29,43 @@ class Map(object):
         for row in range(self.numRows): ## for each empty list
             for col in range(self.numCols): ## for the num of times perscribed by numRows
                 self.grid[row][col] = " "
-        
-    def setCharPosition(self, position = None):
-        if position == None:
-            position = self.position
-        self.grid[position[0]][position[1]] = self.charSym
-    
+
     def displayMap(self):
-        print (" "+"W" * 2 * self.numCols)
+        print (" "+"-" * 2 * self.numCols)
         for row in range (self.numRows):
             print("|", end="")
             for col in range (self.numCols):
                 print(self.grid[row][col], end=" ")
             print("|")
-        print (" "+"W" * 2 * self.numCols)           
+        print (" "+"-" * 2 * self.numCols)
+        
+    def setCharPosition(self, position = None):
+        if position == None:
+            position = self.position
+        self.grid[position[0]][position[1]] = self.charSym
+
+    def addBox(self, position = [1,1], length = 2):
+        for i in range(length):
+            for k in range(length):
+                self.grid[position[0]+i][position[1]+k] = "#"
+                blockedPosition  = [position[0]+i,position[1]+k]
+                self.blockedTiles.append(blockedPosition)
+            
+        i = 0
+        if length > 1:
+            for i in range(length):
+                self.grid[position[0]+i][position[1]+1] = "#"
+                blockedPosition = [position[0]+i,position[1]+1]
+                self.blockedTiles.append(blockedPosition)
+            
+        
+    
+        
     def populateTiles(self, numTiles):
         """Creates numbered tiles at random."""
         import random
         usedTileLocations = []
+        tileChar = "O"
         
         for tile in range(numTiles):
             
@@ -47,14 +73,14 @@ class Map(object):
             randomRow = random.randrange(self.numRows)
 
             ## checks to make sure we don't populate a tile containing our ship
-            while [randomRow, randomCol] == self.position or [randomRow,randomCol] in usedTileLocations:
+            while [randomRow, randomCol] == self.position or [randomRow,randomCol] in usedTileLocations or [randomRow,randomCol] in self.blockedTiles:
                 randomCol = random.randrange(self.numCols)
                 randomRow = random.randrange(self.numRows)
 
             ## add to list of already used tile locations    
             usedTileLocations.append([randomRow,randomCol])
             
-            self.grid[randomRow][randomCol] = str(tile)
+            self.grid[randomRow][randomCol] = str(tileChar)
             
             tileInfo = [tile, [randomRow, randomCol]]
             self.tileList.append(tileInfo)
@@ -63,6 +89,8 @@ class Map(object):
         if position[0] < 0 or position[1] < 0:
             return False
         elif position[0] >= self.numRows or position[1] >= self.numCols:
+            return False
+        elif position in self.blockedTiles:
             return False
         else:
             return True
@@ -126,13 +154,10 @@ class Map(object):
                 for tile in self.tileList:
                     if self.position == tile[1]:
                         self.tileList.remove(tile)
-                        ## testing to see if we can interact with the tile list as intended
-                        print("You hit tile number " + str(tile[0]) + "!")
-                        ## Eric needs
-                        ## Return if event is false, 0
-                        ## Else, return event num 
+                        print("You found the door!!\n")
+                        self.foundDoor = True
+
             elif not self.isValid(self.position):
-                ##print(originalPosition)
                 self.position = originalPosition
                 move = None
             else:
@@ -140,23 +165,70 @@ class Map(object):
             
         self.changeTile(self.position, self.charSym)
        
-            
+class Dungeon (object):
+    """A Collection of Maps"""
+    
+    def __init__ (self, maps):
+        import random
+        self.maps = []
+        self.minLength = 5
+        self.maxLength = 5
+
+        for i in range(maps):
+            random1 = random.randint(self.minLength, self.maxLength)
+            random2 = random.randint(self.minLength, self.maxLength)
+            mapNew = Map(random1,random2, "^", 0, 0, " ")
+            mapNew.setCharPosition()
+            for i in range(2):
+                #print(i)
+                boxSpot = [1, 2]
+                mapNew.addBox(boxSpot, 2)
+            mapNew.populateTiles(1)
+            self.maps.append(mapNew)
+
+def getRoomNumber():
+    while True: 
+        try:
+            numRooms = int(input("How many rooms would you like to traverse?\n"))
+            break
+        except:
+            print("That's not a number I can use!")
+    return numRooms
+
 def main():
-    map1 = Map(5,5, "^", 0, 0, " ")
-    map1.setCharPosition()
-    map1.populateTiles(5)
-    map1.displayMap()
-    #print(Map.tileList)
 
-    print()
+    print("\n\t\tWelcome to the room traversal adventure game!")
+    print("""
+It is your goal to make it from the first room to the last.
+We've recently moved out so there's not a whole lot left to see. 
+You have as many steps as you need so take your time and enjoy
+exploring the empty rooms. Every room is a different size with
+different dimensions so who knows what shapes you'll run in to.
 
-    ## tester program with inputting a specific tile in at a specific spot and for the movement. 
-    
-    ## map1.changeTile([2,3], "T")
-    for i in range(100):
-        map1.movement()
-        map1.displayMap()
+
+""")
+
+    numRooms = getRoomNumber()
         
-    
+
+    dungeon = Dungeon(numRooms)
+    mapCounter = 0
+    while mapCounter < numRooms:
+        dungeon.maps[mapCounter].displayMap()
+        dungeon.maps[mapCounter].movement()
+        if dungeon.maps[mapCounter].foundDoor:
+            mapCounter += 1
+        
+
+        
+    print("""
+Looks like you've opened your final door.
+I hope you had a nice time looking around.
+Come again soon!
+
+-- Sincerely,
+
+Home Owners
+""")
 
 main()
