@@ -1,6 +1,7 @@
 class Map(object):
-    """Creates map object (rows, cols, charSymbol, starting row, starting column)"""
-    
+    """Creates map object."""
+    import events
+    import ShipClass
 
     def __init__(self, numRows, numCols, charSym = "S", startRow = 9, startCol = 5, blankTile = "_"):
         self.numCols = numCols
@@ -8,7 +9,9 @@ class Map(object):
         self.charSym = charSym
         self.position = [startRow,startCol]
         self.blankTile = blankTile
+        self.foundDoor = False
         self.tileList = []
+        self.blockedTiles = []
 
         ## create empty list
         self.grid = []
@@ -22,24 +25,43 @@ class Map(object):
         for row in range(self.numRows): ## for each empty list
             for col in range(self.numCols): ## for the num of times perscribed by numRows
                 self.grid[row][col] = " "
-        
-    def setCharPosition(self, position = None):
-        if position == None:
-            position = self.position
-        self.grid[position[0]][position[1]] = self.charSym
-    
+
     def displayMap(self):
-        print (" "+"W" * 2 * self.numCols)
+        print (" "+"-" * 2 * self.numCols)
         for row in range (self.numRows):
             print("|", end="")
             for col in range (self.numCols):
                 print(self.grid[row][col], end=" ")
             print("|")
-        print (" "+"W" * 2 * self.numCols)           
+        print (" "+"-" * 2 * self.numCols)
+        
+    def setCharPosition(self, position = None):
+        if position == None:
+            position = self.position
+        self.grid[position[0]][position[1]] = self.charSym
+
+    def addBox(self, position = [1,1], length = 2):
+        for i in range(length):
+            for k in range(length):
+                self.grid[position[0]+i][position[1]+k] = "#"
+                blockedPosition  = [position[0]+i,position[1]+k]
+                self.blockedTiles.append(blockedPosition)
+            
+        i = 0
+        if length > 1:
+            for i in range(length):
+                self.grid[position[0]+i][position[1]+1] = "#"
+                blockedPosition = [position[0]+i,position[1]+1]
+                self.blockedTiles.append(blockedPosition)
+            
+        
+    
+        
     def populateTiles(self, numTiles):
         """Creates numbered tiles at random."""
         import random
         usedTileLocations = []
+        tileChar = "O"
         
         for tile in range(numTiles):
             
@@ -47,7 +69,7 @@ class Map(object):
             randomRow = random.randrange(self.numRows)
 
             ## checks to make sure we don't populate a tile containing our ship
-            while [randomRow, randomCol] == self.position or [randomRow,randomCol] in usedTileLocations:
+            while [randomRow, randomCol] == self.position or [randomRow,randomCol] in usedTileLocations or [randomRow,randomCol] in self.blockedTiles:
                 randomCol = random.randrange(self.numCols)
                 randomRow = random.randrange(self.numRows)
 
@@ -56,13 +78,15 @@ class Map(object):
             
             self.grid[randomRow][randomCol] = str(tile)
             
-            tileInfo = [tile, [randomRow, randomCol]]
+            tileInfo = [tile, [randomRow, randomCol], ["example", 2]]
             self.tileList.append(tileInfo)
 
     def isValid(self, position):
         if position[0] < 0 or position[1] < 0:
             return False
         elif position[0] >= self.numRows or position[1] >= self.numCols:
+            return False
+        elif position in self.blockedTiles:
             return False
         else:
             return True
@@ -94,6 +118,7 @@ class Map(object):
         self.charSym = ">"
 
     def movement(self):
+        import events
         ## dictionary of move_ functions
         moves = {"w":self.move_up, "s":self.move_down, "a":self.move_left, "d":self.move_right}
 
@@ -124,15 +149,17 @@ class Map(object):
         
                 ## COLLISION TESTING!!! MIGHT WANT TO MAKE A SEPARATE FUNCTION
                 for tile in self.tileList:
-                    if self.position == tile[1]:
+                    ## checks if tile is a door
+                    if self.position == tile[1] and tile[0] == 0:
                         self.tileList.remove(tile)
-                        ## testing to see if we can interact with the tile list as intended
-                        print("You hit tile number " + str(tile[0]) + "!")
-                        ## Eric needs
-                        ## Return if event is false, 0
-                        ## Else, return event num 
+                        print("You found the door!!\n")
+                        self.foundDoor = True
+                    ## checks if tile for an event
+                    elif self.position == tile[1] and tile[0] != 0:
+                        testing = events.Event(tile[2][0], tile[2][1])
+                        testing.runEvent()
+
             elif not self.isValid(self.position):
-                ##print(originalPosition)
                 self.position = originalPosition
                 move = None
             else:
