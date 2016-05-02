@@ -116,8 +116,8 @@ class Map(object):
     def move_right(self):
         self.position[1] += 1
         self.charSym = ">"
-
-    def movement(self):
+    
+    def movement(self):   ## I want to pass the ship to movement. 
         import events
         ## dictionary of move_ functions
         moves = {"w":self.move_up, "s":self.move_down, "a":self.move_left, "d":self.move_right}
@@ -152,13 +152,14 @@ class Map(object):
                     ## checks if tile is a door
                     if self.position == tile[1] and tile[0] == 0:
                         self.tileList.remove(tile)
-                        print("You found the door!!\n")
+                        print("\n\nYou found the portal to the next chunk of space!!")
+                        print("Sadly, the portal isn't active yet...\n")
                         self.foundDoor = True
                     ## checks if tile for an event
                     elif self.position == tile[1] and tile[0] != 0:
                         print("\n\nYou have encountered an event!!\n\n")
                         testing = events.Event(tile[2][0], tile[2][1])
-                        testing.runEvent()
+                        testing.runEvent() ##and affect the ship here. 
                         print("\n")
 
             elif not self.isValid(self.position):

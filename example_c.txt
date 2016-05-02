@@ -1,4 +1,4 @@
-Scrap parts of the ship for emergancy repairs! We need our oxygen scrubbers working!
+Scrap parts of the ship for emergency repairs! We need our oxygen scrubbers working!
 0
 10
 0
@@ -9,4 +9,4 @@ I don't mind the smell of funk! Leave the hull intact, it'll be handy later.
 -8
 0
 0
-You travel again into the great unknown.
+It feels like you're breathing in smoke instead of air, at least the hull is fine.
