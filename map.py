@@ -156,8 +156,10 @@ class Map(object):
                         self.foundDoor = True
                     ## checks if tile for an event
                     elif self.position == tile[1] and tile[0] != 0:
+                        print("\n\nYou have encountered an event!!\n\n")
                         testing = events.Event(tile[2][0], tile[2][1])
                         testing.runEvent()
+                        print("\n")
 
             elif not self.isValid(self.position):
                 self.position = originalPosition
