@@ -81,7 +81,7 @@ class Event (object):
          
         for i in range(len(self.__blurb__)):
             print(self.__blurb__[i], end = "")
-            time.sleep(1.5)
+            time.sleep(2)
         print()
         
         select = self.__options__ +1
