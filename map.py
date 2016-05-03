@@ -155,7 +155,6 @@ class Map(object):
                     if self.position == tile[1] and tile[0] == 0:
                         self.tileList.remove(tile)
                         print("\n\nYou found the portal to the next chunk of space!!")
-                        print("Sadly, the portal isn't active yet...\n")
                         self.foundDoor = True
                     ## checks if tile for an event
                     elif self.position == tile[1] and tile[0] != 0:
@@ -171,22 +170,64 @@ class Map(object):
                 printf("An error occurred!")
             
         self.changeTile(self.position, self.charSym)
+        
 
-def initializeMap ():
-    mapNew = Map(5,5, "^", 0, 0, " ")
-    mapNew.populateTiles(5)
-    mapNew.displayMap()
+class Galaxy (object):
+    """A Collection of Maps"""
+    
+    def __init__ (self, maps):
+        import random
+        self.maps = []
+        self.numMaps = maps
+        self.minLength = 5
+        self.maxLength = 8
+
+        ## creates a series of maps and stores them in a list
+        for i in range(maps):
+            random1 = random.randint(self.minLength, self.maxLength)
+            random2 = random.randint(self.minLength, self.maxLength)
+            mapNew = initializeMap(random1, random2, 2)
+            self.maps.append(mapNew)
+
+    
+    def play(self):
+        """Standard play function for the game."""
+        mapCounter = 0
+
+        ## allows you to iterate through the list of maps using foundDoor as a flag
+        while mapCounter < self.numMaps:
+            runMap(self.maps[mapCounter])
+            if self.maps[mapCounter].foundDoor:
+                mapCounter += 1
+
+
+def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
+    """Initializes a standard map"""
+    mapNew = Map(mapRows, mapCols, "^", 0, 0, " ")
+    mapNew.populateTiles(numTiles)
     return mapNew
     
 
-def runMap(map1, num = 100):
-    for i in range(100):
-        map1.movement()
-        map1.displayMap()
+def runMap(mapObject):
+    """Couples together displaying and moving throughout the map"""
+    mapObject.displayMap()
+    mapObject.movement()
+
+def howMuchSpace():
+    while True: 
+        try:
+            numRooms = int(input("How much space would you like to traverse?\n"))
+            break
+        except:
+            print("That's not a number I can use!")
+    return numRooms
+
         
 def main():
-    
-    mapNew = initializeMap()
-    runMap(mapNew)
+    numSpace = howMuchSpace()
+
+    galaxy = Galaxy(numSpace)
+    galaxy.play()
+
         
 main()
