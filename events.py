@@ -79,9 +79,10 @@ class Event (object):
     def runEvent(self):
         import time
          
-        for i in range(len(self.__blurb__)):
-            print(self.__blurb__[i], end = "")
-            time.sleep(2)
+        for i in  range(len(self.__blurb__)):
+            for letter in self.__blurb__[i]:
+                print(letter, end="")
+                time.sleep(.1)
         print()
         
         select = self.__options__ +1
@@ -98,7 +99,11 @@ class Event (object):
 
                 ## Read the first option of every list
                 
-                print( x, ")", str(self.__optionList__[x][0]))
+                print( x, ")", end = "")
+                for letter in self.__optionList__[x][0]:
+                    print(str(letter), end="")
+                    time.sleep(.1)
+                print() 
 
 
             try:
