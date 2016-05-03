@@ -82,7 +82,7 @@ class Event (object):
         for i in  range(len(self.__blurb__)):
             for letter in self.__blurb__[i]:
                 print(letter, end="")
-                time.sleep(.05)
+                time.sleep(.01)
         print()
         
         select = self.__options__ +1
@@ -102,7 +102,7 @@ class Event (object):
                 print( x, ")", end = "")
                 for letter in self.__optionList__[x][0]:
                     print(str(letter), end="")
-                    time.sleep(.05)
+                    time.sleep(.01)
                 print() 
 
 
@@ -161,13 +161,14 @@ class Event (object):
             print(self.checkChange(resourceList[i],resourceIndex[i]))
 
     def getResources(self):
-
         return self.__resourceList__
 
 
 ## These lines were for testing
 ##example = Event('example', 2)
 ##example.runEvent()
+##resources = example.getResources()
+##print(resources)
 
         
     

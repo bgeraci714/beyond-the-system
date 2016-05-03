@@ -1,0 +1,10 @@
+TODO: 
+
+1. Fix the event handling so that either files are saved to a concise bin file or something. (Maybe keep the text file format but convert everything to a consistently updated bin file).
+
+2. Implement saving and loading (simply append the events to the ships log)
+	Upon loading, remove events in log from list of possible events. 
+
+3. Inheritance will be done via ship classes or different version of galaxy or of the game. Things should be easier now with 
+
+4. to be determined

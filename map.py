@@ -1,7 +1,8 @@
+import ShipClass
+
 class Map(object):
     """Creates map object."""
     import events
-    import ShipClass
 
     def __init__(self, numRows, numCols, charSym = "S", startRow = 0, startCol = 0, blankTile = "_"):
         self.numCols = numCols
@@ -119,7 +120,7 @@ class Map(object):
         self.position[1] += 1
         self.charSym = ">"
     
-    def movement(self):   ## I want to pass the ship to movement. 
+    def movement(self, ship):
         import events
         ## dictionary of move_ functions
         moves = {"w":self.move_up, "s":self.move_down, "a":self.move_left, "d":self.move_right}
@@ -160,7 +161,8 @@ class Map(object):
                     elif self.position == tile[1] and tile[0] != 0:
                         print("\n\nYou have encountered an event!!\n\n")
                         testing = events.Event(tile[2][0], tile[2][1])
-                        testing.runEvent() ##and affect the ship here. 
+                        testing.runEvent() ##and affect the ship here.
+                        ship.updateResources(testing.getResources())
                         print("\n")
 
             elif not self.isValid(self.position):
@@ -174,6 +176,7 @@ class Map(object):
 
 class Galaxy (object):
     """A Collection of Maps"""
+    import ShipClass
     
     def __init__ (self, maps):
         import random
@@ -190,15 +193,16 @@ class Galaxy (object):
             self.maps.append(mapNew)
 
     
-    def play(self):
+    def play(self, ship):
         """Standard play function for the game."""
         mapCounter = 0
 
         ## allows you to iterate through the list of maps using foundDoor as a flag
         while mapCounter < self.numMaps:
-            runMap(self.maps[mapCounter])
+            runMap(self.maps[mapCounter], ship)
             if self.maps[mapCounter].foundDoor:
                 mapCounter += 1
+                print("\n" + str(ship))
 
 
 def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
@@ -208,10 +212,10 @@ def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
     return mapNew
     
 
-def runMap(mapObject):
+def runMap(mapObject, ship):
     """Couples together displaying and moving throughout the map"""
     mapObject.displayMap()
-    mapObject.movement()
+    mapObject.movement(ship)
 
 def howMuchSpace():
     while True: 
@@ -224,10 +228,14 @@ def howMuchSpace():
 
         
 def main():
+    
+    ship = ShipClass.Ship("Gurren Lagann")
+    print(ship)
+    
     numSpace = howMuchSpace()
 
     galaxy = Galaxy(numSpace)
-    galaxy.play()
+    galaxy.play(ship)
 
         
 main()
