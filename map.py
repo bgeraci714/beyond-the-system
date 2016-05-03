@@ -3,7 +3,7 @@ class Map(object):
     import events
     import ShipClass
 
-    def __init__(self, numRows, numCols, charSym = "S", startRow = 9, startCol = 5, blankTile = "_"):
+    def __init__(self, numRows, numCols, charSym = "S", startRow = 0, startCol = 0, blankTile = "_"):
         self.numCols = numCols
         self.numRows = numRows
         self.charSym = charSym
@@ -25,6 +25,8 @@ class Map(object):
         for row in range(self.numRows): ## for each empty list
             for col in range(self.numCols): ## for the num of times perscribed by numRows
                 self.grid[row][col] = " "
+
+        self.grid[self.position[0]][self.position[1]] = self.charSym
 
     def displayMap(self):
         print (" "+"-" * 2 * self.numCols)
@@ -169,24 +171,22 @@ class Map(object):
                 printf("An error occurred!")
             
         self.changeTile(self.position, self.charSym)
-       
-            
-def main():
-    map1 = Map(5,5, "^", 0, 0, " ")
-    map1.setCharPosition()
-    map1.populateTiles(5)
-    map1.displayMap()
-    #print(Map.tileList)
 
-    print()
-
-    ## tester program with inputting a specific tile in at a specific spot and for the movement. 
+def initializeMap ():
+    mapNew = Map(5,5, "^", 0, 0, " ")
+    mapNew.populateTiles(5)
+    mapNew.displayMap()
+    return mapNew
     
-    ## map1.changeTile([2,3], "T")
+
+def runMap(map1, num = 100):
     for i in range(100):
         map1.movement()
         map1.displayMap()
         
+def main():
     
-
+    mapNew = initializeMap()
+    runMap(mapNew)
+        
 main()
