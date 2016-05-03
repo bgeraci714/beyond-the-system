@@ -37,7 +37,7 @@ class Event (object):
             
             logFile = open(filename, "r")
             
-            self.__blurb__ = logFile.read()
+            self.__blurb__ = logFile.readlines()
 
             logFile.close()
 
@@ -77,10 +77,13 @@ class Event (object):
             print("File Not Found")
 
     def runEvent(self):
-
+        import time
          
-        print(self.__blurb__)
-
+        for i in range(len(self.__blurb__)):
+            print(self.__blurb__[i], end = "")
+            time.sleep(1.5)
+        print()
+        
         select = self.__options__ +1
 
 
