@@ -3,6 +3,26 @@
 ## Create a simple adventure game where a player can travel between
 ## various connected locations. 
 
+title = "\n\t\tWelcome to the room traversal adventure game!"
+intro = """
+It is your goal to make it from the first room to the last.
+We've recently moved out so there's not a whole lot left to see. 
+You have as many steps as you need so take your time and enjoy
+exploring the empty rooms. Every room is a different size with
+different dimensions so who knows what shapes you'll run in to.
+
+
+"""
+outro = """
+Looks like you've opened your final door.
+I hope you had a nice time looking around.
+Come again soon!
+
+-- Sincerely,
+
+Home Owners
+"""
+
 class Map(object):
     """Creates map object."""
     
@@ -171,8 +191,9 @@ class Dungeon (object):
     def __init__ (self, maps):
         import random
         self.maps = []
+        self.numMaps = maps
         self.minLength = 5
-        self.maxLength = 5
+        self.maxLength = 8
 
         for i in range(maps):
             random1 = random.randint(self.minLength, self.maxLength)
@@ -185,6 +206,14 @@ class Dungeon (object):
                 mapNew.addBox(boxSpot, 2)
             mapNew.populateTiles(1)
             self.maps.append(mapNew)
+    def play(self):
+        
+        mapCounter = 0
+        while mapCounter < self.numMaps:
+            self.maps[mapCounter].displayMap()
+            self.maps[mapCounter].movement()
+            if self.maps[mapCounter].foundDoor:
+                mapCounter += 1
 
 def getRoomNumber():
     while True: 
@@ -197,38 +226,16 @@ def getRoomNumber():
 
 def main():
 
-    print("\n\t\tWelcome to the room traversal adventure game!")
-    print("""
-It is your goal to make it from the first room to the last.
-We've recently moved out so there's not a whole lot left to see. 
-You have as many steps as you need so take your time and enjoy
-exploring the empty rooms. Every room is a different size with
-different dimensions so who knows what shapes you'll run in to.
-
-
-""")
+    print(title)
+    print(intro)
 
     numRooms = getRoomNumber()
-        
 
     dungeon = Dungeon(numRooms)
-    mapCounter = 0
-    while mapCounter < numRooms:
-        dungeon.maps[mapCounter].displayMap()
-        dungeon.maps[mapCounter].movement()
-        if dungeon.maps[mapCounter].foundDoor:
-            mapCounter += 1
+    dungeon.play()
         
 
         
-    print("""
-Looks like you've opened your final door.
-I hope you had a nice time looking around.
-Come again soon!
-
--- Sincerely,
-
-Home Owners
-""")
+    print(outro)
 
 main()
