@@ -2,7 +2,7 @@
 
 class Ship(object):
     #Define init
-    def __init__(self, name, biomass, HP, fuel, log, inventory):
+    def __init__(self, name = "Ship", biomass = 10, HP = 100, fuel = 30):
         self.__name = name
         self.__biomass = biomass
         self.__HP = HP
@@ -43,3 +43,5 @@ class Ship(object):
     def updatelog(self, eventdeetz):
         self.__log.append(eventdeetz)
 
+ship1 = Ship("TTGL")
+print(ship1)
