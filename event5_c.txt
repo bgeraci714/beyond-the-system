@@ -1,0 +1,18 @@
+Inspect the planet. Better safe than sorry.
+0
+0
+0
+0
+Your ship analyzes the planet's atmosphere to see if it is safe. After several minutes, it is determined that the planetis embodied with hazardous gasses causing the lovely color that attracted you to it. You decide it's a much better idea to leave it alone and move on.
+Land and look for something useful.
+-10
+-30
+0
+25
+You manage to spend some fuel landing on the planet. Its air looks oddly thick and gaseous. It's clear that the planet is uninhabited. You spend a good chunk of your oxygen leaving your ship and exploring its surface but you manage to find some raw materials that can be used to strengthen your hull.
+Send a droid to scout the planet for you.
+0
+0
+0
+25
+You send orders to one of your droids to explore the planet and look for useful materials. It takes several days but the droid reemerges with materials that can be used to strengthen the hull. The droid, however, is damaged and you are not sure at this point if it can be fixed or scrapped.
