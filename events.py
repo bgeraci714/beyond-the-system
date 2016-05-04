@@ -76,15 +76,20 @@ class Event (object):
         except IOError:
             print("File Not Found")
 
+        singleFile = self.__blurb__
+
     def runEvent(self):
         import time
-         
+
+        
         for i in  range(len(self.__blurb__)):
             for letter in self.__blurb__[i]:
                 print(letter, end="")
                 time.sleep(.01)
         print()
-        
+           
+        ## offset for the selection so it will continue until selection is less
+        ## than the number of options available (2 options, 0 or 1 are choices)
         select = self.__options__ +1
 
 
@@ -100,6 +105,8 @@ class Event (object):
                 ## Read the first option of every list
                 
                 print( x, ")", end = "")
+                #### option list can be changed to single list
+                ## [x][0] represents the description of the choice
                 for letter in self.__optionList__[x][0]:
                     print(str(letter), end="")
                     time.sleep(.01)
@@ -107,7 +114,7 @@ class Event (object):
 
 
             try:
-                
+                ## gets the input to be checked against self.__option__ + 1
                 tempSelect = int(input(''))
                 select = tempSelect
                 
@@ -165,8 +172,8 @@ class Event (object):
 
 
 ## These lines were for testing
-##example = Event('example', 2)
-##example.runEvent()
+example = Event('event3', 3)
+example.runEvent()
 ##resources = example.getResources()
 ##print(resources)
 
