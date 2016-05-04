@@ -172,8 +172,8 @@ class Event (object):
 
 
 ## These lines were for testing
-example = Event('event3', 3)
-example.runEvent()
+##example = Event('event2', 2)
+##example.runEvent()
 ##resources = example.getResources()
 ##print(resources)
 

@@ -81,7 +81,7 @@ class Map(object):
             
             self.grid[randomRow][randomCol] = str(tile)
             
-            tileInfo = [tile, [randomRow, randomCol], ["example", 2]]
+            tileInfo = [tile, [randomRow, randomCol], ["event2", 2]]
             self.tileList.append(tileInfo)
 
     def isValid(self, position):

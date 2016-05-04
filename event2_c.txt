@@ -1,0 +1,12 @@
+Swerve to the right!
+-5
+0
+0
+-40
+You jet off to the right and it looks like you're in the clear. However, there's another, smaller asteroid closing in on your blind spot and it collides with your ship and your hull takes a grave amount of damage.
+Swerve downwards quickly!
+-10
+0
+0
+-5
+You jet downwards as fast as you possibly can. You manage to avoid most of the asteroids completely. Though one did brush up against your hull. 'Tis but a scratch!
