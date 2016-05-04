@@ -1,10 +1,44 @@
-TODO: 
+TODO/Rubric:
 
 1. Fix the event handling so that either files are saved to a concise bin file or something. (Maybe keep the text file format but convert everything to a consistently updated bin file).
 
 2. Implement saving and loading (simply append the events to the ships log)
-	Upon loading, remove events in log from list of possible events. 
+Upon loading, remove events in log from list of possible events. And create 	the ship based on the previous save. 
+	* necessitates a master list of events 
 
-3. Inheritance will be done via ship classes or different version of galaxy or of the game. Things should be easier now with 
+3. Inheritance will be done via ship classes or different version of galaxy or of the game. Things should be easier. Events might also be a good candidate for inheritance. 
 
-4. to be determined
+4. 
+
+
+Rubric: 
+[] 	Completable
+[x] 	Object-Oriented
+[] 	OO: Inheritance  
+[x] 	Map
+[] 	Save/Load
+[x] 	Encounters
+
+Logic for implementing events (for my later reference): 
+
+But it'll be a linked list of events
+If you take a look at the current event text files
+Each event has choices associated with it
+Each choice has a description with 4 mods
+And a resolving text
+My plan is to add one more line
+That has the name of the next file in the list
+It'll go from 6 to 7 options
+And I'm going to use this fact to my advantage
+We're going to instead save the whole thing via readlines
+Len the list
+So we'll have the number of items in the list
+If len(list) % 6 == 0: it's a one stage event
+If len(list) % 7 == 0: it's a two+ stage event
+Does that make sense?
+If %7 == 0: we'll call the file handler on the 7th member of that list
+And run the events in a recursive manner
+If eventlist % 7 == 0:
+   Call file handler 
+   Run event
+And we'll get rid of the individual calls to lists because that's wayyyy too much copying and pasting
