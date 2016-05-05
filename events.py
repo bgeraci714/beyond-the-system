@@ -3,6 +3,30 @@
 import shelve
 import shelveMaker
 
+def printProperly(text, end = "\n"):
+    """Prints 66 characters then starts looking to make a new line."""
+    ## the purpose of print properly is to make printing a lot cleaner
+    ## and assumes the lines will at max be around 74. If a 6+ letter
+    ## word starts right at position 68, it will just reset the line
+    ## so as to not mess up other printing. 
+    import time
+    linePos = 0
+    for letter in text:
+        print(letter, end="")
+        time.sleep(.0)
+        linePos += 1
+        
+        ## probably had a long, don't want weird spacing if we did!
+        if linePos >= 77:
+            linePos = 0
+        ## creates a new line once we hit a space after char position 67
+        elif linePos > 67 and letter == " ":
+            print()
+            linePos = 0
+            
+    print(str(end), end="")
+    
+        
 class Event (object):
     
 
@@ -50,7 +74,7 @@ class Event (object):
             ##adds this list to the full list of options
 
             self.__optionList__.append(curOption)
-
+    """
     def __fileHandle__(self):
 
         filename = self.__name__ + ".txt"
@@ -82,16 +106,22 @@ class Event (object):
             print("File Not Found")
 
         singleFile = self.__blurb__
-
+    """
     def runEvent(self):
         import time
 
-        
+        """
         for i in  range(len(self.__blurb__)):
+            linePos = 0
             for letter in self.__blurb__[i]:
                 print(letter, end="")
                 time.sleep(.00)
-        print()
+                linePos += 1
+                if linePos > 70 and letter == " ":
+                    print()
+                    linePos = 0
+        """
+        printProperly(self.__blurb__)
            
         ## offset for the selection so it will continue until selection is less
         ## than the number of options available (2 options, 0 or 1 are choices)
@@ -101,22 +131,19 @@ class Event (object):
         while select > (self.__options__):
 
             print(" ")
-            print("Captain, these are your options: ")
+            printProperly("Captain, these are your options: ")
             print(" ")
             
             for x in range(self.__options__):
-
+                
+                linePos = 0
 
                 ## Read the first option of every list
                 
-                print( x, ")", end = "")
+                print( str(x) + ") ", end = "")
                 #### option list can be changed to single list
                 ## [x][0] represents the description of the choice
-                for letter in self.__optionList__[x][0]:
-                    print(str(letter), end="")
-                    time.sleep(.00)
-                print() 
-
+                printProperly(self.__optionList__[x][0])
 
             try:
                 ## gets the input to be checked against self.__option__ + 1
@@ -132,7 +159,9 @@ class Event (object):
         ## Reads the resolving action of the selection, then removes it.
         
         print(' ')
-        print(str(results.pop()))
+        resultsPopped = results.pop()
+        printProperly(str(resultsPopped))
+        #print(str(results.pop()))
 
         ## Now, we no longer need the first section of the list
         ## Remove it and we have a nice neat list of numbers.
@@ -140,6 +169,8 @@ class Event (object):
         results.pop(0)
 
         self.resourceUpdate(results)
+
+        input("\nPress enter to continue on.")
 
     def checkChange(self, someInt, someString):
 
@@ -170,22 +201,20 @@ class Event (object):
 
         for i in range(len(resourceList)):
 
-            print(self.checkChange(resourceList[i],resourceIndex[i]))
+            printProperly(self.checkChange(resourceList[i],resourceIndex[i]))
 
     def getResources(self):
         return self.__resourceList__
 
-
-## These lines were for testing
 """
-for i in range(1,6):
-    eventName = ""
-    eventName = "event" + str(i)
-    example = Event(eventName)
-    example.runEvent()
-    print("\n\n")
+## These lines were for testing
+
+#for i in range(1,6):
+eventName = ""
+eventName = "event" + str(4)
+example = Event(eventName)
+example.runEvent()
+print("\n\n")
 ##resources = example.getResources()
 ##print(resources)
-
 """
-    

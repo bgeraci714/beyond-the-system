@@ -32,6 +32,20 @@ class Ship(object):
     def setfuel(self, newfuel):
         self.__fuel = newfuel
 
+    def decrementFuel(self):
+        self.__fuel -= 1
+
+    def shipStatus(self, fuel = False, oxygen = False, biomass = False, hull = False):
+        print()
+        if fuel == True:
+            print("Fuel: \t\t" + str(self.getFuel()))
+        if oxygen == True:
+            print("Oxygen: \t" + str(self.getOxygen()))
+        if biomass == True:
+            print("Biomass: \t" + str(self.getBio()))
+        if hull == True:
+            print("Hull: \t\t" + str(self.getHull()))
+        
     def updateResources (self, resourceChanges):
         ## for reference: resourceChanges = ['fuel', 'oxygen', 'biomass', 'hull integrity']
         ## creates constants for more clear access

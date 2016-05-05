@@ -4,6 +4,10 @@ import shelve
 class Map(object):
     """Creates map object."""
     import events
+    encounters = shelve.open("encounters.dat", "r")
+    unusedEncounters = []
+    for i in range(1,len(encounters)):
+        unusedEncounters.append(i)
 
     def __init__(self, numRows, numCols, charSym = "S", startRow = 0, startCol = 0, blankTile = "_"):
         self.numCols = numCols
@@ -14,7 +18,7 @@ class Map(object):
         self.foundDoor = False
         self.tileList = []
         self.blockedTiles = []
-        self.encounters = shelve.open("encounters.dat", "r")
+        
 
         ## create empty list
         self.grid = []
@@ -68,6 +72,7 @@ class Map(object):
         usedTileLocations = []
         tileChar = "O"
         
+        
         for tile in range(numTiles):
             
             randomCol = random.randrange(self.numCols)
@@ -82,7 +87,15 @@ class Map(object):
             usedTileLocations.append([randomRow,randomCol])
             
             self.grid[randomRow][randomCol] = str(tile)
-            eventName = "event" + str(random.randint(1,len(self.encounters)))
+
+            eventName = ""
+            if tile != 0:
+                eventNum = None
+                while eventNum not in Map.unusedEncounters:
+                    eventNum = random.randint(1,len(Map.encounters))
+                Map.unusedEncounters.remove(eventNum)    
+                eventName = "event" + str(eventNum)
+            
             
             tileInfo = [tile, [randomRow, randomCol], eventName]
             self.tileList.append(tileInfo)
@@ -175,7 +188,8 @@ class Map(object):
                 printf("An error occurred!")
             
         self.changeTile(self.position, self.charSym)
-        
+        ship.decrementFuel()
+        ship.shipStatus(fuel = True)
 
 class Galaxy (object):
     """A Collection of Maps"""
@@ -192,7 +206,7 @@ class Galaxy (object):
         for i in range(maps):
             random1 = random.randint(self.minLength, self.maxLength)
             random2 = random.randint(self.minLength, self.maxLength)
-            mapNew = initializeMap(random1, random2, 2)
+            mapNew = initializeMap(random1, random2, 3)
             self.maps.append(mapNew)
 
     
@@ -206,6 +220,7 @@ class Galaxy (object):
             if self.maps[mapCounter].foundDoor:
                 mapCounter += 1
                 print("\n" + str(ship))
+                input("Hit enter when you're ready to move on.")
 
 
 def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
@@ -213,12 +228,20 @@ def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
     mapNew = Map(mapRows, mapCols, "^", 0, 0, " ")
     mapNew.populateTiles(numTiles)
     return mapNew
-    
+
+def clrScreen ():
+    import os
+    print("\n" * 40)
+    try:
+        os.system('cls')
+    except:
+        os.system('clear')
 
 def runMap(mapObject, ship):
     """Couples together displaying and moving throughout the map"""
     mapObject.displayMap()
     mapObject.movement(ship)
+    ##clrScreen()
 
 def howMuchSpace():
     while True: 

@@ -10,7 +10,7 @@ def importFile (fileName):
     ## import the description file
     file = open(fileNameT, "r")
     blurbText = []
-    blurbText = file.readlines()
+    blurbText = file.readline()
     file.close()
 
     ## imports the choice file
