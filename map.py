@@ -197,6 +197,7 @@ class Map(object):
         ship.shipStatus(fuel = True)
 
     def save(self,ship):
+        """Saves the current status of the log and ship."""
         import shelve
 
         while True:
@@ -280,13 +281,15 @@ def howMuchSpace():
     return numRooms
 
 def load():
+    """Loads in the information from the save file."""
+    ## opens the load file and updates the game's ship/Map with info from the file. 
     import shelve
     ship = None
     
     while True:
         try:
             loadInput = input("Would you like to load a past save file? (y/n): \n")
-            if loadInput.lower() == "y":
+            if "y" in loadInput:
                 loadFile = shelve.open("saveFile.dat", "r")
                 ship = loadFile["ship"]
                 Map.usedEncounters = loadFile["logEvents"]
@@ -294,9 +297,10 @@ def load():
                 loadFile.close()
             break
         except:
-            print("Looks like you don't have a save file yet or we can't find it!")
+            print("Looks like you don't have a save file yet or we can't find it!\n")
             ship = None
             Map.usedEncounters = []
+    print()
         
     return ship
         
