@@ -1,6 +1,9 @@
 ## Events
 
+import shelve
+
 class Event (object):
+    
 
     ## To create an event, simply supply it with a name.
     ## Default number of available choices for every event is four.
@@ -11,11 +14,11 @@ class Event (object):
     ## the second filetype should be named event_c.txt
     ## veiw the readme.txt for full instructions on formatting.
 
-    def __init__ (self, name, numChoices = 4):
-
+    def __init__ (self, name):
+        encountersFile = shelve.open("encounters.dat", "r")
         self.__name__ = name
-        self.__options__= numChoices
-        self.__fileHandle__()
+        self.__options__= encountersFile[name][0]
+        self.__blurb__ = encountersFile[name][1]
 
         ## These won't get values untill the event is run
         ## It's good to set them up here to avoid errors in
@@ -26,6 +29,26 @@ class Event (object):
         self.__bio__ = 0
         self.__hull__ = 0
 
+        self.__optionList__ = []
+
+        for i in range(self.__options__):
+            ## Break each block into usuable parts
+            ## not using readlines because I need to convert to int
+
+            availAction = encountersFile[name][2][0+i*6]
+            fuelDIF = int(encountersFile[name][2][1+i*6])
+            oxyDIF = int(encountersFile[name][2][2+i*6])
+            bioDIF = int(encountersFile[name][2][3+i*6])
+            hullDIF = int(encountersFile[name][2][4+i*6])
+            resolution = encountersFile[name][2][5+i*6]
+
+            ##Store usuable parts in a list
+
+            curOption = [availAction, fuelDIF, oxyDIF, bioDIF, hullDIF, resolution]           
+
+            ##adds this list to the full list of options
+
+            self.__optionList__.append(curOption)
 
     def __fileHandle__(self):
 
@@ -50,26 +73,7 @@ class Event (object):
 
             ##Create a dynamic list to store results of every action.
 
-            self.__optionList__ = []
-
-            for i in range(self.__options__):
-                ## Break each block into usuable parts
-                ## not using readlines because I need to convert to int
-
-                availAction = choiceFile.readline()
-                fuelDIF = int(choiceFile.readline())
-                oxyDIF = int(choiceFile.readline())
-                bioDIF = int(choiceFile.readline())
-                hullDIF = int(choiceFile.readline())
-                resolution = choiceFile.readline()
-
-                ##Store usuable parts in a list
-
-                curOption = [availAction, fuelDIF, oxyDIF, bioDIF, hullDIF, resolution]           
-
-                ##adds this list to the full list of options
-
-                self.__optionList__.append(curOption)
+            
 
             choiceFile.close()
 
@@ -85,7 +89,7 @@ class Event (object):
         for i in  range(len(self.__blurb__)):
             for letter in self.__blurb__[i]:
                 print(letter, end="")
-                time.sleep(.01)
+                time.sleep(.00)
         print()
            
         ## offset for the selection so it will continue until selection is less
@@ -109,7 +113,7 @@ class Event (object):
                 ## [x][0] represents the description of the choice
                 for letter in self.__optionList__[x][0]:
                     print(str(letter), end="")
-                    time.sleep(.01)
+                    time.sleep(.00)
                 print() 
 
 
@@ -172,10 +176,15 @@ class Event (object):
 
 
 ## These lines were for testing
-##example = Event('event2', 2)
-##example.runEvent()
+"""
+for i in range(1,6):
+    eventName = ""
+    eventName = "event" + str(i)
+    example = Event(eventName)
+    example.runEvent()
+    print("\n\n")
 ##resources = example.getResources()
 ##print(resources)
 
-        
+"""
     

@@ -28,7 +28,7 @@ def importFile (fileName):
 
     ## creates the encounter list 
     encounter = []
-    encounter.append(numOptions)
+    encounter.append(int(numOptions))
     encounter.append(blurbText)
     encounter.append(choiceText)
 
@@ -46,14 +46,16 @@ def main():
             shelf.sync()
         except:
             break
-    """
+
+    ## if this doesn't work properly or an event has improper spacing,
+    ## 0.0 will show up, showing you which one you need to fix. 
     for i in range(1,100):
         try:
             eventName = "event" + str(i)
-            print(shelf[eventName])
+            print(i,shelf[eventName][0])
         except:
             break
-    """    
+       
     shelf.close()
 
 
