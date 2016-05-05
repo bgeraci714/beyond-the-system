@@ -1,7 +1,7 @@
 Let's try opening up the cargo hold. That water might really come in handy. 
 0
 -5
-5
+10
 0
 You open the cargo hold but forget the fasten one of \nthe interior doors causing precious oxygen to exit the ship.\nAll is not lost though as you did manage to harvest drinkable water from the comet.
 Run away! could be dangerous. 
@@ -11,8 +11,8 @@ Run away! could be dangerous.
 0
 You successfully ran away. 
 Get close and inspect it for anything useful. 
--1
+-2
 0
-3
--1
+5
+-5
 It scratches the ship and takes a bit of fuel to get up and close but you get a little bit of drinking water by vacuuming a little bit of the ice into your ship. 
