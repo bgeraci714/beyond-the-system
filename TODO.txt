@@ -2,7 +2,7 @@ TODO/Rubric:
 
 1. (done) Fix the event handling so that either files are saved to a concise bin file or something. (Maybe keep the text file format but convert everything to a consistently updated bin file). 
 
-2. Implement saving and loading (simply append the events to the ships log)
+2. (done) Implement saving and loading (simply append the events to the ships log)
 Upon loading, remove events in log from list of possible events. And create 	the ship based on the previous save. 
 	* necessitates a master list of events (done)
 	* all that’s left to do now is append to the ship’s log and add saving/		loading functionality either via the ship or via the map. Map might be easier	just because it’ll have all the map and ship data already (the ship was 		passed to the map). 
@@ -18,7 +18,7 @@ Rubric:
 [x] 	Object-Oriented
 [] 	OO: Inheritance  
 [x] 	Map
-[] 	Save/Load
+[x] 	Save/Load
 [x] 	Encounters
 
 Logic for implementing events (for my later reference): 
