@@ -48,14 +48,17 @@ def main():
             break
 
     ## if this doesn't work properly or an event has improper spacing,
-    ## 0.0 will show up, showing you which one you need to fix. 
+    ## 0.0 will show up, showing you which one you need to fix.
+
+    print(len(shelf))
+    """
     for i in range(1,100):
         try:
             eventName = "event" + str(i)
             print(i,shelf[eventName][0])
         except:
             break
-       
+    """
     shelf.close()
 
 
