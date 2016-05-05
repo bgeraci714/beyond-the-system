@@ -1,10 +1,9 @@
 import ShipClass
+import shelve
 
 class Map(object):
     """Creates map object."""
     import events
-    
-    
 
     def __init__(self, numRows, numCols, charSym = "S", startRow = 0, startCol = 0, blankTile = "_"):
         self.numCols = numCols
@@ -15,7 +14,7 @@ class Map(object):
         self.foundDoor = False
         self.tileList = []
         self.blockedTiles = []
-        ##self.encounters = shelve.open("encounters.dat", "r")
+        self.encounters = shelve.open("encounters.dat", "r")
 
         ## create empty list
         self.grid = []
@@ -83,7 +82,7 @@ class Map(object):
             usedTileLocations.append([randomRow,randomCol])
             
             self.grid[randomRow][randomCol] = str(tile)
-            eventName = "event" + str(random.randint(1,8))
+            eventName = "event" + str(random.randint(1,len(self.encounters)))
             
             tileInfo = [tile, [randomRow, randomCol], eventName]
             self.tileList.append(tileInfo)
