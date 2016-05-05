@@ -80,8 +80,9 @@ class Map(object):
             usedTileLocations.append([randomRow,randomCol])
             
             self.grid[randomRow][randomCol] = str(tile)
+            eventName = "event" + str(random.randint(1,8))
             
-            tileInfo = [tile, [randomRow, randomCol], ["event2", 2]]
+            tileInfo = [tile, [randomRow, randomCol], eventName]
             self.tileList.append(tileInfo)
 
     def isValid(self, position):
@@ -160,7 +161,7 @@ class Map(object):
                     ## checks if tile for an event
                     elif self.position == tile[1] and tile[0] != 0:
                         print("\n\nYou have encountered an event!!\n\n")
-                        testing = events.Event(tile[2][0], tile[2][1])
+                        testing = events.Event(tile[2])
                         testing.runEvent() ##and affect the ship here.
                         ship.updateResources(testing.getResources())
                         print("\n")
