@@ -6,9 +6,8 @@ class Map(object):
     import events
     encounters = shelve.open("encounters.dat", "r")
     unusedEncounters = []
-    for i in range(1,len(encounters)):
-        unusedEncounters.append(i)
-
+    usedEncounters = []
+    
     def __init__(self, numRows, numCols, charSym = "S", startRow = 0, startCol = 0, blankTile = "_"):
         self.numCols = numCols
         self.numRows = numRows
@@ -63,15 +62,20 @@ class Map(object):
                 blockedPosition = [position[0]+i,position[1]+1]
                 self.blockedTiles.append(blockedPosition)
             
-        
-    
+           
+    def updateUnusedEncounters(self):
+        Map.unusedEncounters = []
+        for i in Map.encounters:
+            if len(i) == 6:
+                if int(i[5]) not in Map.usedEncounters:
+                    Map.unusedEncounters.append(int(i[5]))
         
     def populateTiles(self, numTiles):
         """Creates numbered tiles at random."""
         import random
         usedTileLocations = []
         tileChar = "O"
-        
+        self.updateUnusedEncounters()
         
         for tile in range(numTiles):
             
@@ -90,12 +94,12 @@ class Map(object):
 
             eventName = ""
             if tile != 0:
+                
                 eventNum = None
                 while eventNum not in Map.unusedEncounters:
-                    eventNum = random.randint(1,len(Map.encounters))
+                    eventNum = random.randint(1,len(Map.unusedEncounters))
                 Map.unusedEncounters.remove(eventNum)    
                 eventName = "event" + str(eventNum)
-            
             
             tileInfo = [tile, [randomRow, randomCol], eventName]
             self.tileList.append(tileInfo)
@@ -178,6 +182,7 @@ class Map(object):
                         print("\n\nYou have encountered an event!!\n\n")
                         testing = events.Event(tile[2])
                         testing.runEvent() ##and affect the ship here.
+                        ship.updateLog(int(tile[2][5]))
                         ship.updateResources(testing.getResources())
                         print("\n")
 
@@ -191,6 +196,25 @@ class Map(object):
         ship.decrementFuel()
         ship.shipStatus(fuel = True)
 
+    def save(self,ship):
+        import shelve
+
+        while True:
+            try:
+                saveInput = input("Would you like to save? (y/n): \n")
+                if saveInput.lower() == "y":
+                    saveFile = shelve.open("saveFile.dat")
+                    saveFile["ship"] = ship
+                    saveFile["logEvents"] = ship.getLog()
+                    saveFile.sync()
+                    saveFile.close()
+                    break
+                else:
+                    break
+            except:
+                print("Sorry that's not a valid input.\n")
+        
+
 class Galaxy (object):
     """A Collection of Maps"""
     import ShipClass
@@ -200,8 +224,8 @@ class Galaxy (object):
         self.maps = []
         self.numMaps = maps
         self.minLength = 5
-        self.maxLength = 8
-
+        self.maxLength = 5
+        
         ## creates a series of maps and stores them in a list
         for i in range(maps):
             random1 = random.randint(self.minLength, self.maxLength)
@@ -213,14 +237,17 @@ class Galaxy (object):
     def play(self, ship):
         """Standard play function for the game."""
         mapCounter = 0
-
+        
         ## allows you to iterate through the list of maps using foundDoor as a flag
         while mapCounter < self.numMaps:
             runMap(self.maps[mapCounter], ship)
             if self.maps[mapCounter].foundDoor:
                 mapCounter += 1
                 print("\n" + str(ship))
+                self.maps[mapCounter].save(ship)
                 input("Hit enter when you're ready to move on.")
+
+    
 
 
 def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
@@ -252,10 +279,32 @@ def howMuchSpace():
             print("That's not a number I can use!")
     return numRooms
 
+def load():
+    import shelve
+    ship = None
+    
+    while True:
+        try:
+            loadInput = input("Would you like to load a past save file? (y/n): \n")
+            if loadInput.lower() == "y":
+                loadFile = shelve.open("saveFile.dat", "r")
+                ship = loadFile["ship"]
+                Map.usedEncounters = loadFile["logEvents"]
+                loadFile.sync()
+                loadFile.close()
+            break
+        except:
+            print("Looks like you don't have a save file yet or we can't find it!")
+            ship = None
+            Map.usedEncounters = []
+        
+    return ship
         
 def main():
-    
-    ship = ShipClass.Ship("Gurren Lagann")
+
+    ship = load()
+    if ship == None:
+        ship = ShipClass.Ship("Gurren Lagann")
     print(ship)
     
     numSpace = howMuchSpace()

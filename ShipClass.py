@@ -71,8 +71,11 @@ class Ship(object):
         return r
         
     ## Update Log
-    def updatelog(self, eventdeetz):
-        self.__log.append(eventdeetz)
+    def updateLog(self, eventNum):
+        self.__log.append(eventNum)
+
+    def getLog(self):
+        return self.__log
 
 ##ship = Ship("Gurren Lagann")
 ##print(ship)
