@@ -37,8 +37,11 @@ class Ship(object):
 
     def shipStatus(self, fuel = False, oxygen = False, biomass = False, hull = False):
         print()
-        if fuel == True:
+        if fuel == True and oxygen == False and biomass == False:
+            print("Fuel: \t" + str(self.getFuel()))
+        elif fuel == True:
             print("Fuel: \t\t" + str(self.getFuel()))
+            
         if oxygen == True:
             print("Oxygen: \t" + str(self.getOxygen()))
         if biomass == True:

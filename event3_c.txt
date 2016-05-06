@@ -3,7 +3,7 @@ Let's try opening up the cargo hold. That water might really come in handy.
 -5
 10
 0
-You open the cargo hold but forget the fasten one of \nthe interior doors causing precious oxygen to exit the ship.\nAll is not lost though as you did manage to harvest drinkable water from the comet.
+You open the cargo hold but forget the fasten one of the interior doors causing precious oxygen to exit the ship.All is not lost though as you did manage to harvest drinkable water from the comet.
 Run away! could be dangerous. 
 0
 0
