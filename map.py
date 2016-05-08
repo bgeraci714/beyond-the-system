@@ -1,5 +1,6 @@
 import ShipClass
 import shelve
+import intro
 
 class Map(object):
     """Creates map object."""
@@ -96,10 +97,25 @@ class Map(object):
             if tile != 0:
                 
                 eventNum = None
-                while eventNum not in Map.unusedEncounters:
-                    eventNum = random.randint(1,len(Map.unusedEncounters))
+
+                ## if unusedEncounter is empty, this fills it back up
+                ## should avoid any index errors with random.choice but
+                ## the except covers any possible issues
+                try:
+                    if Map.unusedEncounters == []: 
+                        Map.unusedEncounters = Map.usedEncounters[:] 
+                        Map.usedEncounters = []
+                        
+                    eventNum = random.choice(Map.unusedEncounters)
+                    
+                except IndexError:
+                    print("We just excepted an Index Error\n")
+
+    
+                Map.usedEncounters.append(eventNum)
                 Map.unusedEncounters.remove(eventNum)    
                 eventName = "event" + str(eventNum)
+
             
             tileInfo = [tile, [randomRow, randomCol], eventName]
             self.tileList.append(tileInfo)
@@ -284,18 +300,31 @@ def load():
     """Loads in the information from the save file."""
     ## opens the load file and updates the game's ship/Map with info from the file. 
     import shelve
+    import time
     ship = None
     
     while True:
         try:
             loadInput = input("Would you like to load a past save file? (y/n): \n")
             if "y" in loadInput:
+                print("\nLoading in your save file now...\n")
+                time.sleep(1)
                 loadFile = shelve.open("saveFile.dat", "r")
+                
+                print("Preparing your ship for space travel...\n")
+                time.sleep(1)
                 ship = loadFile["ship"]
+
+                print("Loading in your ship's star log...\n")
+                time.sleep(1)
                 Map.usedEncounters = loadFile["logEvents"]
+                
                 loadFile.sync()
                 loadFile.close()
-            break
+                print("Load complete.")
+                break
+            elif "n" in loadInput:
+                break
         except:
             print("Looks like you don't have a save file yet or we can't find it!\n")
             ship = None
@@ -305,10 +334,11 @@ def load():
     return ship
         
 def main():
-
+    intro.displayIntro()
+    
     ship = load()
     if ship == None:
-        ship = ShipClass.Ship("Gurren Lagann")
+        ship = ShipClass.Ship(input("What would you like to name your ship:\n"))
     print(ship)
     
     numSpace = howMuchSpace()
