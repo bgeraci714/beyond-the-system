@@ -8,7 +8,7 @@ def displayIntro(pS = .2):
 
     for line in lines:
         if "+" in line and printingLogo == True:
-            time.sleep(5)
+            time.sleep(3)
             printingLogo = False
         if printingLogo == True:
             print(line, end="")
