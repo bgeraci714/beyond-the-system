@@ -35,13 +35,12 @@ class Ship(object):
     def decrementFuel(self):
         self.__fuel -= 1
 
-    def shipStatus(self, fuel = False, oxygen = False, biomass = False, hull = False):
+    def shipStatus(self, fuel = True, oxygen = True, biomass = True, hull = True):
         print()
-        if fuel == True and oxygen == False and biomass == False:
+        if oxygen == False and biomass == False:
             print("Fuel: \t" + str(self.getFuel()))
         elif fuel == True:
             print("Fuel: \t\t" + str(self.getFuel()))
-            
         if oxygen == True:
             print("Oxygen: \t" + str(self.getOxygen()))
         if biomass == True:

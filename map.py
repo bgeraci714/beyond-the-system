@@ -125,8 +125,10 @@ class Map(object):
 
     def isValid(self, position):
         if position[0] < 0 or position[1] < 0:
+            print("\nYou've reached the edge of the map. You can go no farther.")
             return False
         elif position[0] >= self.numRows or position[1] >= self.numCols:
+            print("\nYou've reached the edge of the map. You can go no farther.")
             return False
         elif position in self.blockedTiles:
             return False
@@ -162,14 +164,14 @@ class Map(object):
     def movement(self, ship):
         import events
         ## dictionary of move_ functions
-        moves = {"w":self.move_up, "s":self.move_down, "a":self.move_left, "d":self.move_right}
+        moves = {"w":self.move_up, "s":self.move_down, "a":self.move_left, "d":self.move_right, "i":ship.shipStatus}
 
         ## create list of dictionary keys for cleaner code when checking their validity
         movesList = []
         for move in moves:
             movesList.append(move)
             
-        moveMenu = "\nChoose a movement: \nw.Up\na.Left\ns.Down\nd.Right\n"
+        moveMenu = "\nChoose an action: \nw.Up\na.Left\ns.Down\nd.Right\ni.Display Ship Info\n"
 
         ## clears out original tile and replaces it with a blank
         
@@ -184,7 +186,9 @@ class Map(object):
             ## might move this outside of movement method to provide ways of ending movement/more options
             while move not in movesList:
                 move = str(input(moveMenu))
+            
             ## Uses functions stored in dictionary.
+         
             moves[move]()
             if self.isValid(self.position):
                 validMove = True
@@ -206,16 +210,15 @@ class Map(object):
                         self.tileList.remove(tile)
                         print("\n")
 
-            elif not self.isValid(self.position):
+            else:
                 self.position = originalPosition
                 move = None
-                print("Sorry that not's a valid move.\n")
-            else:
-                printf("An error occurred!")
+            
             
         self.changeTile(self.position, self.charSym)
-        ship.decrementFuel()
-        ship.shipStatus(fuel = True)
+        if move != "x":
+            ship.decrementFuel()
+        ship.shipStatus(True,False,False,False)
 
     def save(self,ship):
         """Saves the current status of the log and ship."""
@@ -286,7 +289,7 @@ class Galaxy (object):
 
 def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
     """Initializes a standard map"""
-    mapNew = Map(mapRows, mapCols, "^", 0, 0, " ")
+    mapNew = Map(mapRows, mapCols, ">", 0, 0, " ")
     mapNew.populateTiles(numTiles)
     return mapNew
 
@@ -351,7 +354,7 @@ def load():
     return ship
         
 def main():
-    intro.displayIntro()
+    #intro.displayIntro()
     
     ship = load()
     if ship == None:

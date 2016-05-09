@@ -19,4 +19,3 @@ def displayIntro(pS = .2):
 
     input("Press Enter to continue on...\n")
 
-displayIntro()
