@@ -354,7 +354,7 @@ def load():
     return ship
         
 def main():
-    #intro.displayIntro()
+    intro.displayIntro()
     
     ship = load()
     if ship == None:
