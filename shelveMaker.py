@@ -4,8 +4,8 @@ import shelve
 
 def importFile (fileName):
     ## changes file names to the correct ones for each file
-    fileNameT = fileName + ".txt"
-    fileNameC = fileName + "_c.txt"
+    fileNameT = "encounters/" + fileName + ".txt"
+    fileNameC = "encounters/" + fileName + "_c.txt"
 
     ## import the description file
     file = open(fileNameT, "r")
@@ -40,7 +40,10 @@ def main():
     for i in range(1,100):
         try:
             ## creates an iterable shelf object that we can access later
-            eventName = "event" + str(i)
+            if i < 10:
+                eventName = "event" + str("0" + i)
+            else:
+                eventName = "event" + str(i)
             event = importFile(eventName)
             shelf[eventName] = event
             shelf.sync()
@@ -51,14 +54,6 @@ def main():
     ## 0.0 will show up, showing you which one you need to fix.
 
     ##print(len(shelf))
-    """
-    for i in range(1,100):
-        try:
-            eventName = "event" + str(i)
-            print(i,shelf[eventName][0])
-        except:
-            break
-    """
     shelf.close()
 
 

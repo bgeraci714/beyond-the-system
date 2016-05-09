@@ -66,10 +66,13 @@ class Map(object):
            
     def updateUnusedEncounters(self):
         Map.unusedEncounters = []
-        for i in Map.encounters:
-            if len(i) == 6:
-                if int(i[5]) not in Map.usedEncounters:
-                    Map.unusedEncounters.append(int(i[5]))
+        for encounter in Map.encounters:
+            if len(encounter) == 7:
+                if int(encounter[5] * 10 + encounter[6]) not in Map.usedEncounters:
+                    Map.unusedEncounters.append(int(encounter[5] + encounter[6]))
+            elif len(encounter) == 6:
+                if int(encounter[5]) not in Map.usedEncounters:
+                    Map.unusedEncounters.append(int(encounter[5]))
         
     def populateTiles(self, numTiles):
         """Creates numbered tiles at random."""
@@ -111,7 +114,7 @@ class Map(object):
                 except IndexError:
                     print("We just excepted an Index Error\n")
 
-    
+                ##print(Map.unusedEncounters)    
                 Map.usedEncounters.append(eventNum)
                 Map.unusedEncounters.remove(eventNum)    
                 eventName = "event" + str(eventNum)
@@ -250,11 +253,8 @@ class Galaxy (object):
             random1 = random.randint(self.minLength, self.maxLength)
             random2 = random.randint(self.minLength, self.maxLength)
             if i == maps - 1:
-                print(i)
-                
                 mapNew = initializeMap(random1, random2, 0)
             else:
-                print(i)
                 mapNew = initializeMap(random1, random2, 3)
             self.maps.append(mapNew)
 
@@ -264,7 +264,7 @@ class Galaxy (object):
         mapCounter = 0
         
         ## allows you to iterate through the list of maps using foundDoor as a flag
-        while mapCounter < self.numMaps:
+        while mapCounter < self.numMaps and self.notDeadYet(ship):
             if mapCounter == self.numMaps - 1:
                 print("\nWelcome to the final map!")
             runMap(self.maps[mapCounter], ship)
@@ -274,7 +274,14 @@ class Galaxy (object):
                 self.maps[mapCounter].save(ship)
                 input("Hit enter when you're ready to move on.")
 
-    
+        print("\nLooks like you're out of fuel or have beaten the game!\n")
+
+    def notDeadYet(self, ship):
+        if ship.getFuel() <= 0:
+            return False
+
+        else:
+            return True
 
 
 def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
@@ -344,7 +351,7 @@ def load():
     return ship
         
 def main():
-    #intro.displayIntro()
+    intro.displayIntro()
     
     ship = load()
     if ship == None:

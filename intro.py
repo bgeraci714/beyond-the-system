@@ -8,7 +8,7 @@ def displayIntro(pS = .2):
 
     for line in lines:
         if "+" in line and printingLogo == True:
-            time.sleep(3)
+            input()
             printingLogo = False
         if printingLogo == True:
             print(line, end="")
@@ -19,3 +19,4 @@ def displayIntro(pS = .2):
 
     input("Press Enter to continue on...\n")
 
+displayIntro()
