@@ -200,11 +200,13 @@ class Map(object):
                         testing.runEvent() ##and affect the ship here.
                         ship.updateLog(int(tile[2][5]))
                         ship.updateResources(testing.getResources())
+                        self.tileList.remove(tile)
                         print("\n")
 
             elif not self.isValid(self.position):
                 self.position = originalPosition
                 move = None
+                print("Sorry that not's a valid move.\n")
             else:
                 printf("An error occurred!")
             
@@ -247,7 +249,13 @@ class Galaxy (object):
         for i in range(maps):
             random1 = random.randint(self.minLength, self.maxLength)
             random2 = random.randint(self.minLength, self.maxLength)
-            mapNew = initializeMap(random1, random2, 3)
+            if i == maps - 1:
+                print(i)
+                
+                mapNew = initializeMap(random1, random2, 0)
+            else:
+                print(i)
+                mapNew = initializeMap(random1, random2, 3)
             self.maps.append(mapNew)
 
     
@@ -257,6 +265,8 @@ class Galaxy (object):
         
         ## allows you to iterate through the list of maps using foundDoor as a flag
         while mapCounter < self.numMaps:
+            if mapCounter == self.numMaps - 1:
+                print("\nWelcome to the final map!")
             runMap(self.maps[mapCounter], ship)
             if self.maps[mapCounter].foundDoor:
                 mapCounter += 1
@@ -334,7 +344,7 @@ def load():
     return ship
         
 def main():
-    intro.displayIntro()
+    #intro.displayIntro()
     
     ship = load()
     if ship == None:
