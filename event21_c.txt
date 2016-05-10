@@ -1,0 +1,12 @@
+Decide to make a game to pass the time.
+0
+0
+0
+0
+You design a basic, text-based space exploration game based on your adventures. While it is simple in design, it is a lot of fun to play. After you have completed making the game, you wonder to yourself, "What should I call it?" $You decide to name it "Beyond the System". You hope people like it if you ever meet any.
+Give up.
+0
+0
+0
+0
+You realize that coding a game is a lot of work. You give up half-way through and save the data. Maybe you will come back to it later.
