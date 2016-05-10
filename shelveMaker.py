@@ -4,8 +4,8 @@ import shelve
 
 def importFile (fileName):
     ## changes file names to the correct ones for each file
-    fileNameT = "encounters/" + fileName + ".txt"
-    fileNameC = "encounters/" + fileName + "_c.txt"
+    fileNameT = "encounters\\" + fileName + ".txt"
+    fileNameC = "encounters\\" + fileName + "_c.txt"
 
     ## import the description file
     file = open(fileNameT, "r")
@@ -53,7 +53,7 @@ def main():
     ## if this doesn't work properly or an event has improper spacing,
     ## 0.0 will show up, showing you which one you need to fix.
 
-    ##print(len(shelf))
+    print(len(shelf))
     shelf.close()
 
 
