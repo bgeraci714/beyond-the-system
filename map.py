@@ -36,9 +36,6 @@ class Map(object):
         self.grid[self.position[0]][self.position[1]] = self.charSym
 
     def displayMap(self):
-        import time
-
-        """
         print (" "+"-" * 2 * self.numCols)
         for row in range (self.numRows):
             print("|", end="")
@@ -46,25 +43,6 @@ class Map(object):
                 print(self.grid[row][col], end=" ")
             print("|")
         print (" "+"-" * 2 * self.numCols)
-        """
-        
-        mapDisplay = ""
-        mapDisplay += " "+"-" * 2 * self.numCols + "\n"
-        for row in range (self.numRows):
-            mapDisplay += "|"
-            for col in range (self.numCols):
-                mapDisplay += self.grid[row][col] + " "
-            mapDisplay += "|\n"
-        mapDisplay += " "+"-" * 2 * self.numCols
-
-        print(mapDisplay)
-        """
-        k = 0
-        for i in mapDisplay:
-            if i == "\n":
-                print(k)
-            k += 1
-        """
         
     def setCharPosition(self, position = None):
         if position == None:
@@ -376,7 +354,7 @@ def load():
     return ship
         
 def main():
-    ##intro.displayIntro()
+    intro.displayIntro()
     
     ship = load()
     if ship == None:
