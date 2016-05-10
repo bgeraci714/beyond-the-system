@@ -1,1 +1,1 @@
-We found an asteroid.
+You found an asteroid.
