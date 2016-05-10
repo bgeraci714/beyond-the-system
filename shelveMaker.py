@@ -41,7 +41,7 @@ def main():
         try:
             ## creates an iterable shelf object that we can access later
             if i < 10:
-                eventName = "event" + str("0" + i)
+                eventName = "event" + str(i)
             else:
                 eventName = "event" + str(i)
             event = importFile(eventName)
