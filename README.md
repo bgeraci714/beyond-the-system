@@ -2,6 +2,7 @@
 
 To get the game to run, all you need to do is run game.py and the rest is taken care of. 
 
+
 A procedurally generated space exploration game meant to serve as the final project for our programming fundamentals class.
 
 The game can be broken down into several key components. 
