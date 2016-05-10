@@ -326,12 +326,10 @@ class FinalMap (Map):
                         else:
                             events.printProperly(FinalMap.endings[NEUTRAL_ENDING])
                             FinalMap.foundEnding = True
-
             else:
                 self.position = originalPosition
                 move = None
                 print("\nSorry, you can't move there!\n")
-            
             
         self.changeTile(self.position, self.charSym)
         if move != "i" and FinalMap.foundEnding == False:
@@ -348,16 +346,16 @@ class Galaxy (object):
     def __init__ (self, maps, ship):
         import random
         self.maps = []
-        self.numMaps = maps - int(len(ship.getLog()) % 2) + 1
+        self.numMaps = maps - (int(len(ship.getLog()) / 2 + 1))
         self.minLength = 5
         self.maxLength = 14
         
         ## creates a series of maps and stores them in a list
-        for i in range(maps):
+        for i in range(self.numMaps):
             random1 = random.randint(self.minLength, self.maxLength)
             random2 = random.randint(self.minLength, self.maxLength)
-            if i == maps - 1:
-                mapNew = initializeFinalMap(ship,random1, random2, 0)
+            if i == self.numMaps - 1:
+                mapNew = initializeFinalMap(ship,5, 5, 0)
             else:
                 mapNew = initializeMap(random1, random2, 3)
                 
@@ -378,7 +376,8 @@ class Galaxy (object):
     def play(self, ship):
         """Standard play function for the game."""
         mapCounter = 0
-        
+        print("self.numMaps = " + str(self.numMaps))
+        print("length of the log = " + str(len(ship.getLog())))
         ## allows you to iterate through the list of maps using foundDoor as a flag
         while mapCounter < self.numMaps and self.notDeadYet(ship) and not self.maps[mapCounter].foundEnding:
             runMap(self.maps[mapCounter], ship)
@@ -391,7 +390,7 @@ class Galaxy (object):
                 input("Hit enter when you're ready to move on.")
 
         if self.notDeadYet(ship):
-            print("You've made it through the game! Thanks for playing!")
+            print("\nYou've made it through the game! Thanks for playing!")
         elif not self.notDeadYet(ship):
             if ship.getFuel() <= 0:
                 text.displayDeathOutro("fuel")
@@ -402,6 +401,8 @@ class Galaxy (object):
             elif ship.getHull() <= 0:
                 text.displayDeathOutro("hull")
     
+
+
 
 def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
     """Initializes a standard map"""

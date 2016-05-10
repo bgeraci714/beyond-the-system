@@ -9,9 +9,13 @@ def printProperly(text, printSpeed = 0.0,end = "\n"):
     import time
     linePos = 0
     for letter in text:
-        print(letter, end="")
-        time.sleep(printSpeed)
-        linePos += 1
+        if letter == "$":
+            print("\n")
+            linePos = 0
+        else:
+            print(letter, end="")
+            time.sleep(printSpeed)
+            linePos += 1
         
         ## probably had a long, don't want weird spacing if we did!
         if linePos >= 77:
@@ -143,7 +147,7 @@ class Event (object):
         return self.__resourceList__
 
 
-
+"""
 ## These lines were for testing
 
 #for i in range(1,6):
@@ -154,4 +158,4 @@ example.runEvent()
 print("\n\n")
 ##resources = example.getResources()
 ##print(resources)
-
+"""
