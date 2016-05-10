@@ -152,8 +152,6 @@ class Map(object):
         else:
             print("Not a valid position on the map")
             
-    
-
     ## move functions
     def move_up(self):
         self.position[0] -= 1
@@ -186,7 +184,6 @@ class Map(object):
         ## clears out original tile and replaces it with a blank
         
         self.changeTile(self.position, self.blankTile)
-        
         
         validMove = False 
         move = None
@@ -397,14 +394,17 @@ class Galaxy (object):
     
 
 
-
+## initialization functions 
 def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
     """Initializes a standard map"""
     import random
     mapNew = Map(mapRows, mapCols, ">", 0, 0, " ")
     for i in range(random.randint(0,int(mapRows * mapCols / 2))):
         randPosition = [random.randint(1,mapCols - 1), random.randint(1,mapRows - 1)]
+
+        ## adds random tiles to the map
         mapNew.addBox(randPosition)
+        
     mapNew.populateTiles(numTiles)
     return mapNew
 
@@ -419,16 +419,6 @@ def runMap(mapObject, ship):
     """Couples together displaying and moving throughout the map"""
     mapObject.displayMap()
     mapObject.movement(ship)
-    ##clrScreen()
-
-def howMuchSpace():
-    while True: 
-        try:
-            numRooms = int(input("How much space would you like to traverse?\n"))
-            break
-        except:
-            print("That's not a number I can use!")
-    return numRooms
 
 def load():
     """Loads in the information from the save file."""
@@ -480,6 +470,7 @@ def cheatCode(ship):
             cheatInput = input("Would you like to use a cheat? (y/n): \n")
             
 def main():
+    GAME_LENGTH = 8
     
     text.displayIntro()
     
@@ -492,9 +483,9 @@ def main():
 
     cheatCode(ship)
     
-    numSpace = 8
+    numMaps = GAME_LENGTH
 
-    galaxy = Galaxy(numSpace, ship)
+    galaxy = Galaxy(numMaps, ship)
     galaxy.play(ship)
 
         
