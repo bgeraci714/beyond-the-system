@@ -143,15 +143,15 @@ class Event (object):
         return self.__resourceList__
 
 
-"""
+
 ## These lines were for testing
 
 #for i in range(1,6):
 eventName = ""
-eventName = "event" + str(3)
+eventName = "event" + str(9)
 example = Event(eventName)
 example.runEvent()
 print("\n\n")
 ##resources = example.getResources()
 ##print(resources)
-"""
+
