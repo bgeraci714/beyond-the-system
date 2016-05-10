@@ -1,32 +1,7 @@
-## Events
+## File that handles reading in events and printing them properly.
 
 import shelve
 import shelveMaker
-
-def printProperly(text, printSpeed = 0.0,end = "\n"):
-    """Prints 66 characters then starts looking to make a new line."""
-    
-    import time
-    linePos = 0
-    for letter in text:
-        if letter == "$":
-            print("\n")
-            linePos = 0
-        else:
-            print(letter, end="")
-            time.sleep(printSpeed)
-            linePos += 1
-        
-        ## probably had a long, don't want weird spacing if we did!
-        if linePos >= 77:
-            linePos = 0
-        ## creates a new line once we hit a space after char position 67
-        elif linePos > 67 and letter == " ":
-            print()
-            linePos = 0
-            
-    print(str(end), end="")
-    
         
 class Event (object):
     
@@ -146,16 +121,26 @@ class Event (object):
     def getResources(self):
         return self.__resourceList__
 
-
-
-## These lines were for testing
-
-#for i in range(1,6):
-eventName = ""
-eventName = "event" + str(20)
-example = Event(eventName)
-example.runEvent()
-print("\n\n")
-##resources = example.getResources()
-##print(resources)
-
+def printProperly(text, printSpeed = 0.0,end = "\n"):
+    """Prints 66 characters then starts looking to make a new line."""
+    
+    import time
+    linePos = 0
+    for letter in text:
+        if letter == "$":
+            print("\n")
+            linePos = 0
+        else:
+            print(letter, end="")
+            time.sleep(printSpeed)
+            linePos += 1
+        
+        ## probably had a long, don't want weird spacing if we did!
+        if linePos >= 77:
+            linePos = 0
+        ## creates a new line once we hit a space after char position 67
+        elif linePos > 67 and letter == " ":
+            print()
+            linePos = 0
+            
+    print(str(end), end="")

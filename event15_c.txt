@@ -7,6 +7,6 @@ You move on from the mossy debris. Nothing has been gained and nothing has been 
 Collect some moss and have it analyzed.
 0
 0
-0
+-5
 0
 You send out a droid to collect some of the moss to be analyzed. Your ship's computer determines that it is inedible and in fact poisonous. You discard the moss.

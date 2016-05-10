@@ -1,7 +1,7 @@
 class Ship(object):
     """The general ship class that will be used throughout the game."""
     ## Define init
-    def __init__(self, name = "Ship", biomass = 20, hull = 100, fuel = 100):
+    def __init__(self, name = "Ship", biomass = 20, hull = 100, fuel = 70):
         self.__name = name
         self.__biomass = biomass
         self.__hull = hull

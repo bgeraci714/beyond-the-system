@@ -3,10 +3,10 @@ Send droids to scavenge useful items for you.
 15
 10
 0
-Your droids retrieve a half-full oxygen tank and a considerable amount of food. They also bring back a small device resembling the data storage device you brought from your home planet. With some tinkering, you are able to get it to communicate with your ship's computer and analyze its contents. The computer determines that the storage device contains documents written in an ancient language. It is able to translate bits and pieces, using the data to create a dictionary. You spend some of your free time studying this basic dictionary and manage to pick up some of the language.
+Your droids retrieve a half-full oxygen tank and a considerable amount of food. They also bring back a small device resembling the data storage device you brought from your home planet. With some tinkering, you are able to get it to communicate with your ship's computer and analyze its contents. $The computer determines that the storage device contains documents written in an ancient language. It is able to translate bits and pieces, using the data to create a dictionary. You spend some of your free time studying this basic dictionary and manage to pick up some of the language.
 Leave it alone. Who knows what happened to it. It's not worth the risk.
 0
 0
 0
 0
-You move on, leaving the wartorn ship behind.
+You move on, leaving the war torn ship behind.

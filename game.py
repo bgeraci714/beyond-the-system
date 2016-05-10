@@ -480,7 +480,7 @@ def cheatCode(ship):
             cheatInput = input("Would you like to use a cheat? (y/n): \n")
             
 def main():
-    GAME_LENGTH = 8
+    GAME_LENGTH = 6
     
     text.displayIntro()
     

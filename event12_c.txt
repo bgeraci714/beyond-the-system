@@ -3,10 +3,10 @@ Land the ship and attempt to harvest the valuable resources.
 0
 0
 -15
-You manage to land the ship and make your way out onto the planet's surface. It is pitch black and very difficult for you to see. You turn on a light attached to your suit and examine the planet's rocky surface. Suddenly, you hear something fly overhead and crash into your ship. You shine your light in its direction quick enough to catch a glimpse of a winged creature with an abnormally elongated head with an eye stalk on either side. It screetches and rams into your ship once more. You dive under the ship, crawl to the other side, and manage to scramble back to safety. As you are starting the ship's engine, you turn on its lights and see several creatures surrounding you and ramming themselves into the ship. It causes some damage. One latches onto the ship but falls to its doom as you quickly ascend upwards. You weren't able to gather anything of use.
+You manage to land the ship and make your way out onto the planet's surface. It is pitch black and very difficult for you to see. You turn on a light attached to your suit and examine the planet's rocky surface. Suddenly, you hear something fly overhead and crash into your ship. You shine your light in its direction quick enough to catch a glimpse of a winged creature with an abnormally elongated head with an eye stalk on either side. $It screeches and rams into your ship once more. You dive under the ship, crawl to the other side, and manage to scramble back to safety. As you are starting the ship's engine, you turn on its lights and see several creatures surrounding you and ramming themselves into the ship. It causes some damage. One latches onto the ship but falls to its doom as you quickly ascend upwards. You weren't able to gather anything of use.
 Continue on without landing. The ominous planet gives you the creeps. Who knows what could be living on it.
 0
 0
 0
 0
-You continue on without landing. Nothing is gained and nothing is lost but at least you didn't encountor any monsters.
+You continue on without landing. Nothing is gained and nothing is lost but at least you didn't encounter any monsters.
