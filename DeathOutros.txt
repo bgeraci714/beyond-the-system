@@ -1,4 +1,7 @@
-Your ship stops propelling itself forward and slows until it is barely floating forward. You check its status and the fuel has run out. There is nothing nearby of use for you to make more. This is where your journey ends. You have until your nutrience runs out before death has you firmly in its icy grasp.
-Your ship has lost too much oxygen to provide a safe environment for you. Your throat tightens and you gasp for any available air, quickly aggravating the situaton. It will only be minutes before you fully suffocate and your journey ends permanently.
+Your ship stops propelling itself forward and slows until it is barely floating forward. You check its status and the fuel has run out. There is nothing nearby of use for you to make more. This is where your journey ends. You have until your nutrients runs out before death has you firmly in its icy grasp.
+
+Your ship has lost too much oxygen to provide a safe environment for you. Your throat tightens and you gasp for any available air, quickly aggravating the situation. It will only be minutes before you fully suffocate and your journey ends permanently.
+
 You have run out of food and water. It is only a matter of hours before you began to feel to weak to continue on. It won't be long before your journey ends and dehydration lays claim to your life.
-The hull has substained far too much damage. Its metallic pieces are breaking off one by one, sucking all of the oxygen out along with it. You look on in horror as your ship falls apart before your eyes and the coldness of space sets in leaving you lifeless.
+
+The hull has sustained far too much damage. Its metallic pieces are breaking off one by one, sucking all of the oxygen out along with it. You look on in horror as your ship falls apart before your eyes and the coldness of space sets in leaving you lifeless.

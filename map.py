@@ -1,6 +1,7 @@
 import ShipClass
 import shelve
-import intro
+import text
+import events
 
 class Map(object):
     """Creates map object."""
@@ -279,8 +280,8 @@ class FinalMap (Map):
     def movement(self, ship):
         import events
         BAD_ENDING = 0
-        NEUTRAL_ENDING = 1
-        GOOD_ENDING = 2
+        NEUTRAL_ENDING = 2
+        GOOD_ENDING = 4
         
         ## dictionary of move_ functions
         moves = {"w":self.move_up, "s":self.move_down, "a":self.move_left, "d":self.move_right, "i":ship.shipStatus}
@@ -380,19 +381,27 @@ class Galaxy (object):
         
         ## allows you to iterate through the list of maps using foundDoor as a flag
         while mapCounter < self.numMaps and self.notDeadYet(ship) and not self.maps[mapCounter].foundEnding:
-            if mapCounter == self.numMaps - 1:
-                print("\nWelcome to the final map!")
             runMap(self.maps[mapCounter], ship)
             if self.maps[mapCounter].foundDoor:
                 mapCounter += 1
+                events.printProperly("\nYou take some time to refine a little fuel (5 units worth) and stock up. Who knows what's ahead.")
+                ship.increaseFuel(5)
                 print("\n" + str(ship))
                 self.maps[mapCounter].save(ship)
                 input("Hit enter when you're ready to move on.")
 
-        print("\nLook's like you've either died or beaten the game!\n")
-
+        if self.notDeadYet(ship):
+            print("You've made it through the game! Thanks for playing!")
+        elif not self.notDeadYet(ship):
+            if ship.getFuel() <= 0:
+                text.displayDeathOutro("fuel")
+            elif ship.getBio() <= 0:
+                text.displayDeathOutro("biomass")
+            elif ship.getOxygen() <= 0:
+                text.displayDeathOutro("oxygen")
+            elif ship.getHull() <= 0:
+                text.displayDeathOutro("hull")
     
-
 
 def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
     """Initializes a standard map"""
@@ -464,7 +473,7 @@ def load():
     return ship
         
 def main():
-    ##intro.displayIntro()
+    ##text.displayIntro()
     
     ship = load()
     if ship == None:

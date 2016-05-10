@@ -1,4 +1,4 @@
-Try opening up the cargo hold. That water might really come in handy. 
+Try opening up the cargo hold. That water might really come in handy.
 0
 -5
 10
@@ -9,10 +9,10 @@ Run away! It could be dangerous.
 0
 0
 0
-You successfully ran away. 
-Get close and inspect it for anything useful. 
+You successfully ran away.
+Get close and inspect it for anything useful.
 -2
 0
 5
 -5
-It scratches the ship and takes a bit of fuel to get up and close but you manage to get a bit of drinking water by vacuuming some of the ice into your ship. 
+It scratches the ship and takes a bit of fuel to get up and close but you manage to get a bit of drinking water by vacuuming some of the ice into your ship.

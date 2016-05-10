@@ -34,6 +34,8 @@ class Ship(object):
 
     def decrementFuel(self):
         self.__fuel -= 1
+    def increaseFuel(self, newFuel):
+        self.__fuel += newFuel
 
     def shipStatus(self, fuel = True, oxygen = True, biomass = True, hull = True):
         print()
