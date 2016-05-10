@@ -152,7 +152,7 @@ class Event (object):
 
 #for i in range(1,6):
 eventName = ""
-eventName = "event" + str(19)
+eventName = "event" + str(20)
 example = Event(eventName)
 example.runEvent()
 print("\n\n")
