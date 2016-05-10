@@ -243,6 +243,7 @@ class Map(object):
             else:
                 self.position = originalPosition
                 move = None
+                print("\nSorry, you can't move there!\n")
             
             
         self.changeTile(self.position, self.charSym)
