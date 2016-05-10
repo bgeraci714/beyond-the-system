@@ -8,6 +8,7 @@ class Map(object):
     encounters = shelve.open("encounters.dat", "r")
     unusedEncounters = []
     usedEncounters = []
+    foundEnding = False
     
     def __init__(self, numRows, numCols, charSym = "S", startRow = 0, startCol = 0, blankTile = "_"):
         self.numCols = numCols
@@ -252,18 +253,17 @@ class Map(object):
                 print("Sorry that's not a valid input.\n")
                 
 class FinalMap (Map):
-    BAD_ENDING = 0
-    NEUTRAL_ENDING = 1
-    GOOD_ENDING = 2
+    endingFile = open("endings.txt","r")
+    endings = endingFile.readlines()
+    endingFile.close()
+    
     def youMadeIt(self, ship):
         print("Great job. You and the " + ship.getName() + "\n")
 
     def populateTiles(self, ship):
         import random
-
-        endingFile = open("endings.txt","r")
-        endings = endingFile.readlines()
-
+        usedTileLocations = []
+        
         randomCol = random.randrange(self.numCols)
         randomRow = random.randrange(self.numRows)
 
@@ -273,17 +273,70 @@ class FinalMap (Map):
 
         self.grid[randomRow][randomCol] = "?"
 
-        ## if you went to 5 or less events, you get the bad ending
-        if len(ship.getLog()) < 6:
-            print(endings[BAD_ENDING])
-        elif len(ship.getLog()) >= 6 and (12 in ship.getLog() or 14 in ship.getLog()):
-            print(endings[GOOD_ENDING])
-        else:
-            print(endings[NEUTRAL_ENDING])
+        tileInfo = [1, [randomRow, randomCol]]
+        self.tileList.append(tileInfo)
             
+    def movement(self, ship):
+        import events
+        BAD_ENDING = 0
+        NEUTRAL_ENDING = 1
+        GOOD_ENDING = 2
         
+        ## dictionary of move_ functions
+        moves = {"w":self.move_up, "s":self.move_down, "a":self.move_left, "d":self.move_right, "i":ship.shipStatus}
 
+        ## create list of dictionary keys for cleaner code when checking their validity
+        movesList = []
+        for move in moves:
+            movesList.append(move)
+            
+        moveMenu = "\nChoose an action: \nw.Up\na.Left\ns.Down\nd.Right\ni.Display Ship Info\n"
+
+        ## clears out original tile and replaces it with a blank
+        self.changeTile(self.position, self.blankTile)
         
+        validMove = False 
+        move = None
+
+        while not validMove:
+            originalPosition = self.position[:]
+            ## might move this outside of movement method to provide ways of ending movement/more options
+            while move not in movesList:
+                move = str(input(moveMenu))
+            
+            ## Uses functions stored in dictionary.
+         
+            moves[move]()
+            if self.isValid(self.position):
+                validMove = True
+        
+                ## Tests for collisions
+                for tile in self.tileList:
+                    ## checks if tile is a door
+                    if self.position == tile[1]:
+                        self.tileList.remove(tile)
+                        
+                        if len(ship.getLog()) < 2:
+                            events.printProperly(FinalMap.endings[BAD_ENDING])
+                            FinalMap.foundEnding = True
+                        elif len(ship.getLog()) >= 2 and (2 in ship.getLog() or 6 in ship.getLog()):
+                            events.printProperly(FinalMap.endings[GOOD_ENDING])
+                            FinalMap.foundEnding = True
+                        else:
+                            events.printProperly(FinalMap.endings[NEUTRAL_ENDING])
+                            FinalMap.foundEnding = True
+
+            else:
+                self.position = originalPosition
+                move = None
+                print("\nSorry, you can't move there!\n")
+            
+            
+        self.changeTile(self.position, self.charSym)
+        if move != "i" and FinalMap.foundEnding == False:
+            ship.decrementFuel()
+            ship.shipStatus(fuel = True, oxygen = False, biomass = False, hull = False)
+    
         
         
 
@@ -291,10 +344,10 @@ class Galaxy (object):
     """A Collection of Maps"""
     import ShipClass
     
-    def __init__ (self, maps):
+    def __init__ (self, maps, ship):
         import random
         self.maps = []
-        self.numMaps = maps
+        self.numMaps = maps - int(len(ship.getLog()) % 2) + 1
         self.minLength = 5
         self.maxLength = 14
         
@@ -303,19 +356,30 @@ class Galaxy (object):
             random1 = random.randint(self.minLength, self.maxLength)
             random2 = random.randint(self.minLength, self.maxLength)
             if i == maps - 1:
-                mapNew = initializeMap(random1, random2, 0)
+                mapNew = initializeFinalMap(ship,random1, random2, 0)
             else:
                 mapNew = initializeMap(random1, random2, 3)
                 
             self.maps.append(mapNew)
 
+    def notDeadYet(self, ship):
+        if ship.getFuel() <= 0:
+            return False
+        elif ship.getBio() <= 0:
+            return False
+        elif ship.getOxygen() <= 0:
+            return False
+        elif ship.getHull() <= 0:
+            return False
+        else:
+            return True
     
     def play(self, ship):
         """Standard play function for the game."""
         mapCounter = 0
         
         ## allows you to iterate through the list of maps using foundDoor as a flag
-        while mapCounter < self.numMaps and self.notDeadYet(ship):
+        while mapCounter < self.numMaps and self.notDeadYet(ship) and not self.maps[mapCounter].foundEnding:
             if mapCounter == self.numMaps - 1:
                 print("\nWelcome to the final map!")
             runMap(self.maps[mapCounter], ship)
@@ -325,14 +389,9 @@ class Galaxy (object):
                 self.maps[mapCounter].save(ship)
                 input("Hit enter when you're ready to move on.")
 
-        print("\nLooks like you're out of fuel or have beaten the game!\n")
+        print("\nLook's like you've either died or beaten the game!\n")
 
-    def notDeadYet(self, ship):
-        if ship.getFuel() <= 0:
-            return False
-
-        else:
-            return True
+    
 
 
 def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
@@ -345,8 +404,8 @@ def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
     mapNew.populateTiles(numTiles)
     return mapNew
 
-def initializeFinalMap (ship, mapRows = 5, mapCols = 5, numTiles = 5):
-    """Initializes a standard map"""
+def initializeFinalMap (ship,mapRows = 5, mapCols = 5, numTiles = 5):
+    """Initializes the final map"""
     import random
     mapNew = FinalMap(mapRows, mapCols, ">", 0, 0, " ")
     mapNew.populateTiles(ship)
@@ -405,7 +464,7 @@ def load():
     return ship
         
 def main():
-    intro.displayIntro()
+    ##intro.displayIntro()
     
     ship = load()
     if ship == None:
@@ -414,7 +473,7 @@ def main():
     
     numSpace = howMuchSpace()
 
-    galaxy = Galaxy(numSpace)
+    galaxy = Galaxy(numSpace, ship)
     galaxy.play(ship)
 
         
