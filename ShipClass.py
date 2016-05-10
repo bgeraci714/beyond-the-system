@@ -1,3 +1,8 @@
+## Beyond the System
+## A game by Blake Geraci and Ashley Hartzler
+##
+## Program that creates the main Ship class for the game. 
+
 class Ship(object):
     """The general ship class that will be used throughout the game."""
     ## Define init

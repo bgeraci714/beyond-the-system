@@ -1,3 +1,8 @@
+## Beyond the System
+## A game by Blake Geraci and Ashley Hartzler
+##
+## Program for handling the many non-event text files/functions used in the game. 
+
 import events
 
 def displayIntro(pS = .2):

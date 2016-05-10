@@ -1,3 +1,6 @@
+## Beyond the System
+## A game by Blake Geraci and Ashley Hartzler
+##
 ## Program to create the Encounters for the final project
 
 import sys

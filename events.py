@@ -1,4 +1,4 @@
-## File that handles reading in events and printing them properly.
+## Program that handles reading in events and printing them properly.
 
 import shelve
 import shelveMaker

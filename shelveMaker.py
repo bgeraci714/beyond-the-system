@@ -1,4 +1,7 @@
-## Creates the .dat.db file that we need for the 
+## Beyond the System
+## A game by Blake Geraci and Ashley Hartzler
+##
+## Creates the .dat.db file needed for reading in events. 
 
 import shelve
 
