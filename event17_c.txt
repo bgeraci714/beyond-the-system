@@ -1,0 +1,12 @@
+Attempt to land. Maybe the water can be collected.
+-5
+0
+0
+-30
+You attempt to land but before you can, your ship begans to overheat. Your hull takes a considerable amount of damage as you change course and speed away from the planet. You observe its surface behind you and take note of the burning ice. It explains some things.
+Move on from the planet. It looks dangerous.
+0
+0
+0
+0
+You decide not to land your ship. It seemed like a bad idea in retrospect given how close the planet is to a star. It didn't seem safe anyways.

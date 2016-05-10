@@ -1,0 +1,12 @@
+Attempt to board the ship. There might be something useful.
+0
+-10
+5
+-10
+You position your ship alongside the cargo hold and prepare to board. Your ship loses some oxygen in the process of boarding. Once inside, you find the skeletons of the ship's previous owners. It looks like they have been here for years. You manage to find a few cans of food for your trouble but not much else. You scrape your ship in the process of unboarding.
+Leave it alone. Who knows what could be lurking inside.
+0
+0
+0
+0
+You leave the ship unexplored. Nothing has been gained and nothing has been lost.

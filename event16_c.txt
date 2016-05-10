@@ -1,0 +1,12 @@
+Collect some liquid and have it analyzed.
+0
+0
+5
+0
+You command a droid to collect some liquid for you. The ship's computer determines that the liquid is safe for consumption and strangely enough, it may be alcoholic. You pour some into a container. It smells and tastes fruity. You feel more relaxed after drinking it and a little bit tipsy.
+Leave the liquid alone. It doesn't seem likely that it would be of use anyways.
+0
+0
+0
+0
+You leave the liquid alone but marvel at how such a thing could exist deep in space. How strange.
