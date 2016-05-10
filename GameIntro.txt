@@ -26,6 +26,6 @@ Game Instructions:
 - Use the W,A,S,D, keys to move and hit enter after each keystroke to input the command.
 - Numbers on the map correlate to events. 
 - Zeros on the map are doors to the next map.
-- If you run out of fuel, nutrients, oxygen, or hull integrity, it's game over.
+- If you run out of fuel, biomass(food/water), oxygen, or hull integrity, it's game over.
 - You may save before moving to a new map and load after the this screen.
 - The object of the game is to survive all of the events and make it to the final map. 
