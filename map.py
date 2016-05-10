@@ -59,16 +59,9 @@ class Map(object):
         for i in range(length):
             for k in range(length):
                 if self.isValid(position):
-                    self.grid[position[0]+i][position[1]+k] = "#"
+                    self.grid[position[0]+i][position[1]+k] = "*" 
                     blockedPosition  = [position[0]+i,position[1]+k]
                     self.blockedTiles.append(blockedPosition)
-            
-        i = 0
-        if length > 1:
-            for i in range(length):
-                self.grid[position[0]+i][position[1]+1] = "#"
-                blockedPosition = [position[0]+i,position[1]+1]
-                self.blockedTiles.append(blockedPosition)
             
            
     def updateUnusedEncounters(self):
@@ -101,8 +94,11 @@ class Map(object):
 
             ## add to list of already used tile locations    
             usedTileLocations.append([randomRow,randomCol])
-            
-            self.grid[randomRow][randomCol] = str(tile)
+
+            if tile != 0:
+                self.grid[randomRow][randomCol] = "?"
+            else:
+                self.grid[randomRow][randomCol] = "O"
 
             eventName = ""
             if tile != 0:
@@ -254,9 +250,42 @@ class Map(object):
                     break
             except:
                 print("Sorry that's not a valid input.\n")
+                
 class FinalMap (Map):
+    BAD_ENDING = 0
+    NEUTRAL_ENDING = 1
+    GOOD_ENDING = 2
     def youMadeIt(self, ship):
         print("Great job. You and the " + ship.getName() + "\n")
+
+    def populateTiles(self, ship):
+        import random
+
+        endingFile = open("endings.txt","r")
+        endings = endingFile.readlines()
+
+        randomCol = random.randrange(self.numCols)
+        randomRow = random.randrange(self.numRows)
+
+        while [randomRow, randomCol] == self.position or [randomRow,randomCol] in usedTileLocations or [randomRow,randomCol] in self.blockedTiles:
+                randomCol = random.randrange(self.numCols)
+                randomRow = random.randrange(self.numRows)
+
+        self.grid[randomRow][randomCol] = "?"
+
+        ## if you went to 5 or less events, you get the bad ending
+        if len(ship.getLog()) < 6:
+            print(endings[BAD_ENDING])
+        elif len(ship.getLog()) >= 6 and (12 in ship.getLog() or 14 in ship.getLog()):
+            print(endings[GOOD_ENDING])
+        else:
+            print(endings[NEUTRAL_ENDING])
+            
+        
+
+        
+        
+        
 
 class Galaxy (object):
     """A Collection of Maps"""
@@ -310,20 +339,17 @@ def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
     """Initializes a standard map"""
     import random
     mapNew = Map(mapRows, mapCols, ">", 0, 0, " ")
-    for i in range(random.randint(0,16)):
+    for i in range(random.randint(0,int(mapRows * mapCols / 2))):
         randPosition = [random.randint(1,mapCols - 1), random.randint(1,mapRows - 1)]
         mapNew.addBox(randPosition)
     mapNew.populateTiles(numTiles)
     return mapNew
 
-def initializeFinalMap (mapRows = 5, mapCols = 5, numTiles = 5):
+def initializeFinalMap (ship, mapRows = 5, mapCols = 5, numTiles = 5):
     """Initializes a standard map"""
     import random
     mapNew = FinalMap(mapRows, mapCols, ">", 0, 0, " ")
-    for i in range(random.randint(0,16)):
-        randPosition = [random.randint(1,mapCols - 1), random.randint(1,mapRows - 1)]
-        mapNew.addBox(randPosition)
-    mapNew.populateTiles(numTiles)
+    mapNew.populateTiles(ship)
     return mapNew
 
 def runMap(mapObject, ship):
@@ -379,7 +405,7 @@ def load():
     return ship
         
 def main():
-    ##intro.displayIntro()
+    intro.displayIntro()
     
     ship = load()
     if ship == None:

@@ -22,7 +22,7 @@
 ++++++++++++++++++
 Game Instructions:
 ++++++++++++++++++
-- Your ship is the “>” that flies around the map. 
+- Your ship is the > that flies around the map. 
 - Use the W,A,S,D, keys to move and hit enter after each keystroke to input the command.
 - Numbers on the map correlate to events. 
 - Zeros on the map are doors to the next map.
