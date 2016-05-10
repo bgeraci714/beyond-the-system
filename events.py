@@ -5,10 +5,7 @@ import shelveMaker
 
 def printProperly(text, end = "\n"):
     """Prints 66 characters then starts looking to make a new line."""
-    ## the purpose of print properly is to make printing a lot cleaner
-    ## and assumes the lines will at max be around 74. If a 6+ letter
-    ## word starts right at position 68, it will just reset the line
-    ## so as to not mess up other printing. 
+    
     import time
     linePos = 0
     for letter in text:
@@ -29,14 +26,11 @@ def printProperly(text, end = "\n"):
         
 class Event (object):
     
-
-    ## To create an event, simply supply it with a name.
     ## Default number of available choices for every event is four.
-
-    ## out of program, this class will read two files, one will be the event.txt
+    ## out of program, this class will read two files, one will be the event#.txt
     ## this will hold the story information
 
-    ## the second filetype should be named event_c.txt
+    ## the second filetype should be named event#_c.txt
     ## veiw the readme.txt for full instructions on formatting.
 
     def __init__ (self, name):
@@ -44,10 +38,6 @@ class Event (object):
         self.__name__ = name
         self.__options__= encountersFile[name][0]
         self.__blurb__ = encountersFile[name][1]
-
-        ## These won't get values untill the event is run
-        ## It's good to set them up here to avoid errors in
-        ## getters and setters
         
         self.__fuel__ = 0
         self.__oxy__ = 0
@@ -57,70 +47,27 @@ class Event (object):
         self.__optionList__ = []
 
         for i in range(self.__options__):
-            ## Break each block into usuable parts
-            ## not using readlines because I need to convert to int
+            LINES_PER_CHOICE = 6
+            
+            ## Breaks each block into usuable parts
+            availAction = encountersFile[name][2][0 + (i * LINES_PER_CHOICE)]
+            fuelDIF = int(encountersFile[name][2][1 + (i * LINES_PER_CHOICE)])
+            oxyDIF = int(encountersFile[name][2][2 + (i * LINES_PER_CHOICE)])
+            bioDIF = int(encountersFile[name][2][3 + (i * LINES_PER_CHOICE)])
+            hullDIF = int(encountersFile[name][2][4 + (i * LINES_PER_CHOICE)])
+            resolution = encountersFile[name][2][5 + (i * LINES_PER_CHOICE)]
 
-            availAction = encountersFile[name][2][0+i*6]
-            fuelDIF = int(encountersFile[name][2][1+i*6])
-            oxyDIF = int(encountersFile[name][2][2+i*6])
-            bioDIF = int(encountersFile[name][2][3+i*6])
-            hullDIF = int(encountersFile[name][2][4+i*6])
-            resolution = encountersFile[name][2][5+i*6]
-
-            ##Store usuable parts in a list
+            ## Store usuable parts in a list
 
             curOption = [availAction, fuelDIF, oxyDIF, bioDIF, hullDIF, resolution]           
 
-            ##adds this list to the full list of options
+            ## Adds this list to the full list of options
 
             self.__optionList__.append(curOption)
-    """
-    def __fileHandle__(self):
 
-        filename = self.__name__ + ".txt"
-
-        c_file = self.__name__ + "_c.txt"
-
-        try:
-            
-            logFile = open(filename, "r")
-            
-            self.__blurb__ = logFile.readlines()
-
-            logFile.close()
-
-        except IOError:
-            print("File Not Found")
-
-
-        try:
-            choiceFile = open(c_file, "r")
-
-            ##Create a dynamic list to store results of every action.
-
-            
-
-            choiceFile.close()
-
-        except IOError:
-            print("File Not Found")
-
-        singleFile = self.__blurb__
-    """
     def runEvent(self):
         import time
 
-        """
-        for i in  range(len(self.__blurb__)):
-            linePos = 0
-            for letter in self.__blurb__[i]:
-                print(letter, end="")
-                time.sleep(.00)
-                linePos += 1
-                if linePos > 70 and letter == " ":
-                    print()
-                    linePos = 0
-        """
         printProperly(self.__blurb__)
            
         ## offset for the selection so it will continue until selection is less
@@ -141,7 +88,6 @@ class Event (object):
                 ## Read the first option of every list
                 
                 print( str(x) + ") ", end = "")
-                #### option list can be changed to single list
                 ## [x][0] represents the description of the choice
                 printProperly(self.__optionList__[x][0])
 
@@ -176,31 +122,21 @@ class Event (object):
 
         if someInt > 0:
             passString = "The ship has gained " + str(someInt) + ' ' + someString + '.'
-
         elif someInt < 0:
-
             ## convert someInt to a positive for grammar
-            
             passString = "The ship has lost " + str(abs(someInt)) + ' ' + someString + '.'
-
         else:
-
             passString = "Levels of " + someString + " remain stable."
-
 
         return passString
 
     def resourceUpdate(self, resourceList):
-
-        
         ## Remember, the order of the list is:
-        
         resourceIndex = ['fuel', 'oxygen', 'biomass', 'hull integrity']
 
         self.__resourceList__ = resourceList
 
         for i in range(len(resourceList)):
-
             printProperly(self.checkChange(resourceList[i],resourceIndex[i]))
 
     def getResources(self):

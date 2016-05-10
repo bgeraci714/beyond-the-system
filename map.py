@@ -26,7 +26,7 @@ class Map(object):
             self.grid.append([])
         for row in self.grid: ## for each empty list
             for col in range(self.numCols): ## for the num of times perscribed by numRows
-                row.append(self.blankTile) ##add char sizeY times to the sub list within row
+                row.append(self.blankTile) ##add char numRow times to the sub list within row
 
         ## experiment
         for row in range(self.numRows): ## for each empty list
@@ -38,6 +38,7 @@ class Map(object):
     def displayMap(self):
         import time
 
+        ## alternative method for displaying the map
         """
         print (" "+"-" * 2 * self.numCols)
         for row in range (self.numRows):
@@ -90,7 +91,7 @@ class Map(object):
         Map.unusedEncounters = []
         for encounter in Map.encounters:
             if len(encounter) == 7:
-                if int(encounter[5] * 10 + encounter[6]) not in Map.usedEncounters:
+                if int(encounter[5] + encounter[6]) not in Map.usedEncounters:
                     Map.unusedEncounters.append(int(encounter[5] + encounter[6]))
             elif len(encounter) == 6:
                 if int(encounter[5]) not in Map.usedEncounters:
@@ -216,7 +217,7 @@ class Map(object):
             if self.isValid(self.position):
                 validMove = True
         
-                ## COLLISION TESTING!!! MIGHT WANT TO MAKE A SEPARATE FUNCTION
+                ## Tests for collisions
                 for tile in self.tileList:
                     ## checks if tile is a door
                     if self.position == tile[1] and tile[0] == 0:
@@ -226,10 +227,10 @@ class Map(object):
                     ## checks if tile for an event
                     elif self.position == tile[1] and tile[0] != 0:
                         print("\n\nYou have encountered an event!!\n\n")
-                        testing = events.Event(tile[2])
-                        testing.runEvent() ##and affect the ship here.
+                        encounter = events.Event(tile[2])
+                        encounter.runEvent() ##and affect the ship here.
                         ship.updateLog(int(tile[2][5]))
-                        ship.updateResources(testing.getResources())
+                        ship.updateResources(encounter.getResources())
                         self.tileList.remove(tile)
                         print("\n")
 
@@ -239,9 +240,9 @@ class Map(object):
             
             
         self.changeTile(self.position, self.charSym)
-        if move != "x":
+        if move != "i":
             ship.decrementFuel()
-        ship.shipStatus(True,False,False,False)
+            ship.shipStatus(fuel = True, oxygen = False, biomass = False, hull = False)
 
     def save(self,ship):
         """Saves the current status of the log and ship."""

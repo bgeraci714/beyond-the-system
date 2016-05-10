@@ -3,7 +3,7 @@
 import shelve
 
 def importFile (fileName):
-    ## changes file names to the correct ones for each file
+    ## changes file names to the correct ones for each file (T is text, C is choices)
     fileNameT = fileName + ".txt"
     fileNameC = fileName + "_c.txt"
 
@@ -19,7 +19,7 @@ def importFile (fileName):
     choiceText = file.readlines()
     file.close()
 
-    ## meant for something later, if we decide to add a link
+    ## meant for something later, if we later decide to add a link
     ## to another event, 7 will let us do so. 
     if len(choiceText) % 6 == 0:
         numOptions = len(choiceText) / 6
@@ -40,20 +40,15 @@ def main():
     for i in range(1,100):
         try:
             ## creates an iterable shelf object that we can access later
-            if i < 10:
-                eventName = "event" + str(i)
-            else:
-                eventName = "event" + str(i)
+            eventName = "event" + str(i)
             event = importFile(eventName)
             shelf[eventName] = event
             shelf.sync()
         except:
             break
 
-    ## if this doesn't work properly or an event has improper spacing,
-    ## 0.0 will show up, showing you which one you need to fix.
-
-    print(len(shelf))
+    ## easy print statement for testing how many events were read in. 
+    ## print(len(shelf))
     shelf.close()
 
 

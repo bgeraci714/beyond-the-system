@@ -1,14 +1,14 @@
 class Ship(object):
     """The general ship class that will be used throughout the game."""
     ## Define init
-    def __init__(self, name = "Ship", biomass = 10, hull = 100, fuel = 30):
+    def __init__(self, name = "Ship", biomass = 20, hull = 100, fuel = 50):
         self.__name = name
         self.__biomass = biomass
         self.__hull = hull
         self.__fuel = fuel
         self.__oxygen = 100
         self.__log = []
-        self.__inventory = []
+        
 
     ## Ship Getters
     def getName(self):
@@ -29,8 +29,8 @@ class Ship(object):
         self.__biomass = newbio
     def setHull(self, newHull):
         self.__hull = newHull
-    def setfuel(self, newfuel):
-        self.__fuel = newfuel
+    def setfuel(self, newFuel):
+        self.__fuel = newFuel
 
     def decrementFuel(self):
         self.__fuel -= 1
