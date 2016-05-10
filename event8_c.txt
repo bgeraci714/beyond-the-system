@@ -3,7 +3,7 @@ Attempt to land. There might be something useful.
 0
 10
 20
-You manage to land your ship. The planet's surface is rocky and icy. Though it'stoo cold for you to traverse, you send out the droids to collect water and materials. They bring back plenty of both and today, luck must be on your side because they find materials for both repairing the hull and converting to fuel.
+You manage to land your ship. The planet's surface is rocky and icy. Though it's too cold for you to traverse, you send out the droids to collect water and materials. They bring back plenty of both and today, luck must be on your side because they find materials for both repairing the hull and converting to fuel.
 Continue on. It could be dangerous.
 0
 0
