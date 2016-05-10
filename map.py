@@ -346,7 +346,7 @@ class Galaxy (object):
     def __init__ (self, maps, ship):
         import random
         self.maps = []
-        self.numMaps = maps - (int(len(ship.getLog()) / 2 + 1))
+        self.numMaps = maps - (int(len(ship.getLog()) / 2))
         self.minLength = 5
         self.maxLength = 14
         
