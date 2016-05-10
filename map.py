@@ -72,12 +72,13 @@ class Map(object):
             position = self.position
         self.grid[position[0]][position[1]] = self.charSym
 
-    def addBox(self, position = [1,1], length = 2):
+    def addBox(self, position = [1,1], length = 1):
         for i in range(length):
             for k in range(length):
-                self.grid[position[0]+i][position[1]+k] = "#"
-                blockedPosition  = [position[0]+i,position[1]+k]
-                self.blockedTiles.append(blockedPosition)
+                if self.isValid(position):
+                    self.grid[position[0]+i][position[1]+k] = "#"
+                    blockedPosition  = [position[0]+i,position[1]+k]
+                    self.blockedTiles.append(blockedPosition)
             
         i = 0
         if length > 1:
@@ -141,6 +142,8 @@ class Map(object):
                 Map.usedEncounters.append(eventNum)
                 Map.unusedEncounters.remove(eventNum)    
                 eventName = "event" + str(eventNum)
+
+                ## Here for testing 
                 ##print(Map.usedEncounters)
                 ##print(Map.unusedEncounters)
             
@@ -149,10 +152,10 @@ class Map(object):
 
     def isValid(self, position):
         if position[0] < 0 or position[1] < 0:
-            print("\nYou've reached the edge of the map. You can go no farther.")
+            ##print("\nYou've reached the edge of the map. You can go no farther.")
             return False
         elif position[0] >= self.numRows or position[1] >= self.numCols:
-            print("\nYou've reached the edge of the map. You can go no farther.")
+            ##print("\nYou've reached the edge of the map. You can go no farther.")
             return False
         elif position in self.blockedTiles:
             return False
@@ -229,7 +232,10 @@ class Map(object):
                         print("\n\nYou have encountered an event!!\n\n")
                         encounter = events.Event(tile[2])
                         encounter.runEvent() ##and affect the ship here.
-                        ship.updateLog(int(tile[2][5]))
+                        if len(tile[2]) == 6:
+                            ship.updateLog(int(tile[2][5]))
+                        else:
+                            ship.updateLog(int(tile[2][5] + tile[2][6]))
                         ship.updateResources(encounter.getResources())
                         self.tileList.remove(tile)
                         print("\n")
@@ -273,7 +279,7 @@ class Galaxy (object):
         self.maps = []
         self.numMaps = maps
         self.minLength = 5
-        self.maxLength = 5
+        self.maxLength = 14
         
         ## creates a series of maps and stores them in a list
         for i in range(maps):
@@ -283,6 +289,7 @@ class Galaxy (object):
                 mapNew = initializeMap(random1, random2, 0)
             else:
                 mapNew = initializeMap(random1, random2, 3)
+                
             self.maps.append(mapNew)
 
     
@@ -313,7 +320,11 @@ class Galaxy (object):
 
 def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
     """Initializes a standard map"""
+    import random
     mapNew = Map(mapRows, mapCols, ">", 0, 0, " ")
+    for i in range(random.randint(0,16)):
+        randPosition = [random.randint(1,mapCols - 1), random.randint(1,mapRows - 1)]
+        mapNew.addBox(randPosition)
     mapNew.populateTiles(numTiles)
     return mapNew
 

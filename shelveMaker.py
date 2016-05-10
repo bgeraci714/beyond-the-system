@@ -35,7 +35,7 @@ def importFile (fileName):
     return encounter
 
 def main():
-    shelf = shelve.open("encounters.dat")
+    shelf = shelve.open("encounters.dat", "n")
 
     for i in range(1,100):
         try:
