@@ -1,11 +1,15 @@
-You can't live here anymore. The planet has sustained a massive natural disaster caused by a 
-large asteroid. Many members of your species have succumbed to its affects. Luckily, you 
-managed to bunker down in your ship and leave with everything intact. You believe, quite rightly, 
-that you may be the sole survivor of your species and head out on a journey fueled by a well-known 
-trasmission received and broadcasted by your species' officials several weeks before the incident. 
-You have saved it to a small data storage device roughly the size of your thumb and have uploaded 
-it to your ship's onboard computer. 
+You can't live here anymore. The planet has sustained a massive natural
+disaster caused by a large asteroid. Many members of your species have
+succumbed to its affects. Luckily, you managed to bunker down in your 
+ship and leave with everything intact. You believe, quite rightly, that 
+you may be the sole survivor of your species and head out on a journey 
+fueled by a well-known trasmission received and broadcasted by your 
+species' officials several weeks before the incident. You have saved it
+to a small data storage device roughly the size of your thumb and have
+uploaded it to your ship's onboard computer. 
+
 The transmission displays as following:
+
 |.|-------------------------------------------------------------|.|
 |.|-------------------------------------------------------------|.|                                                                                                       
 |.|----------------------------,:-------------------------------|.|                                                
@@ -48,5 +52,6 @@ The transmission displays as following:
 |.|-----;@@@@@@@,--#@@@@@@@@@@@@@     @@@@@@@--`@@@@@@@@#-------|.|                        
 |.|------:@@@@@@@--:@@@@@@@@@@@@@@@@@@@@@@@@'--#@@@@@@@+--------|.| 
 
-Attached is metadata that you have analyzed revealing coordinates that you believe is the origin of 
-the transmission. You embark on a journey to find where it came from.                        
+Attached is metadata that you have analyzed revealing coordinates that 
+you believe is the origin of the transmission. You embark on a journey 
+to find where it came from.                        
