@@ -1,0 +1,24 @@
+Read the cook book. 
+0
+0
+20
+0
+You whip up some extra food to save for later. Good thinking! 
+Read the pamphlet about oxygen tanks. 
+0
+20
+0
+0
+You learn a new technique for cleaning your tanks and end up with a little fresher air. 
+Read the repair manuel. 
+0
+0
+0
+20
+You read through it and find a nice technique for tuning up the ship and end up repairing a couple issues while doing so. 
+Read the old chemistry textbook. 
+20
+0
+0
+0
+You dust off the textbook and learn that you can turn some of your excess waste into usable fuel (Who knew!?). Guess some textbooks are worth the big price tag. 

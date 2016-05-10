@@ -1,3 +1,11 @@
+## Beyond the System
+## A game by Blake Geraci and Ashley Hartzler
+##
+## This is the primary game file for the game
+## It would be preferable if the game could be run in the shell.
+## This is because we have a print function that does not behave
+## in the same manner in the command prompt as it does in the shell. 
+
 import ShipClass
 import shelve
 import text
@@ -118,16 +126,11 @@ class Map(object):
                     eventNum = random.choice(Map.unusedEncounters)
                     
                 except IndexError:
-                    print("We just excepted an Index Error\n")
+                    print("You encountered an Index Error\n")
 
-                
                 Map.usedEncounters.append(eventNum)
                 Map.unusedEncounters.remove(eventNum)    
                 eventName = "event" + str(eventNum)
-
-                ## Here for testing 
-                ##print(Map.usedEncounters)
-                ##print(Map.unusedEncounters)
             
             tileInfo = [tile, [randomRow, randomCol], eventName]
             self.tileList.append(tileInfo)
@@ -135,10 +138,8 @@ class Map(object):
     def isValid(self, position):
         """Checks if a given position is valid."""
         if position[0] < 0 or position[1] < 0:
-            ##print("\nYou've reached the edge of the map. You can go no farther.")
             return False
         elif position[0] >= self.numRows or position[1] >= self.numCols:
-            ##print("\nYou've reached the edge of the map. You can go no farther.")
             return False
         elif position in self.blockedTiles:
             return False
@@ -182,7 +183,6 @@ class Map(object):
         moveMenu = "\nChoose an action: \nw.Up\na.Left\ns.Down\nd.Right\ni.Display Ship Info\n"
 
         ## clears out original tile and replaces it with a blank
-        
         self.changeTile(self.position, self.blankTile)
         
         validMove = False 
@@ -202,20 +202,24 @@ class Map(object):
         
                 ## Tests for collisions
                 for tile in self.tileList:
+                    
                     ## checks if tile is a door
                     if self.position == tile[1] and tile[0] == 0:
                         self.tileList.remove(tile)
                         print("\n\nYou found the portal to the next chunk of space!!")
                         self.foundDoor = True
+                        
                     ## checks if tile for an event
                     elif self.position == tile[1] and tile[0] != 0:
                         print("\n\nYou have encountered an event!!\n\n")
                         encounter = events.Event(tile[2])
                         encounter.runEvent() ##and affect the ship here.
+                        ## checks to see if the event's name is event# or event## 
                         if len(tile[2]) == 6:
                             ship.updateLog(int(tile[2][5]))
                         else:
                             ship.updateLog(int(tile[2][5] + tile[2][6]))
+                            
                         ship.updateResources(encounter.getResources())
                         self.tileList.remove(tile)
                         print("\n")
@@ -224,8 +228,8 @@ class Map(object):
                 self.position = originalPosition
                 move = None
                 print("\nSorry, you can't move there!\n")
-            
-            
+                
+        ## changes new tile's string    
         self.changeTile(self.position, self.charSym)
         if move != "i":
             ship.decrementFuel()
@@ -276,6 +280,8 @@ class FinalMap (Map):
         BAD_ENDING = 0
         NEUTRAL_ENDING = 2
         GOOD_ENDING = 4
+        STORY_EVENT1 = 13
+        STORY_EVENT2 = 18
         
         ## dictionary of move_ functions
         moves = {"w":self.move_up, "s":self.move_down, "a":self.move_left, "d":self.move_right, "i":ship.shipStatus}
@@ -310,11 +316,12 @@ class FinalMap (Map):
                     ## checks if tile is a door
                     if self.position == tile[1]:
                         self.tileList.remove(tile)
-                        
-                        if len(ship.getLog()) < 2:
+
+                        ## 
+                        if len(ship.getLog()) < 7:
                             events.printProperly(FinalMap.endings[BAD_ENDING])
                             FinalMap.foundEnding = True
-                        elif len(ship.getLog()) >= 2 and (2 in ship.getLog() or 6 in ship.getLog()):
+                        elif len(ship.getLog()) >= 7 and (STORY_EVENT1 in ship.getLog() or STORY_EVENT2 in ship.getLog()):
                             events.printProperly(FinalMap.endings[GOOD_ENDING])
                             FinalMap.foundEnding = True
                         else:
@@ -415,14 +422,16 @@ def initializeFinalMap (ship,mapRows = 5, mapCols = 5, numTiles = 5):
     mapNew.populateTiles(ship)
     return mapNew
 
+
 def runMap(mapObject, ship):
     """Couples together displaying and moving throughout the map"""
     mapObject.displayMap()
     mapObject.movement(ship)
 
+
 def load():
     """Loads in the information from the save file."""
-    ## opens the load file and updates the game's ship/Map with info from the file. 
+    ## opens the load file and updates the game's ship/Map. 
     import shelve
     import time
     ship = None
@@ -458,6 +467,7 @@ def load():
     return ship
 
 def cheatCode(ship):
+    """Allows you to input a cheat giving you a large amount of fuel."""
     cheatInput = input("\nWould you like to use a cheat? (y/n): \n")
     while "y" not in cheatInput or "n" not in cheatInput: 
         if "y" in cheatInput:

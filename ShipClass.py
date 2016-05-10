@@ -27,6 +27,9 @@ class Ship(object):
     def increaseFuel(self, newFuel):
         self.__fuel += newFuel
 
+    def setHull(self, newHull):
+        self.__hull = newHull
+
     def shipStatus(self, fuel = True, oxygen = True, biomass = True, hull = True):
         print()
         if oxygen == False and biomass == False:

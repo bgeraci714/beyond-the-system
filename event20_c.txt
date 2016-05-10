@@ -1,0 +1,18 @@
+Try to steer the ship as fast as possible away from the planet and gun it. It's your best hope. 
+-5
+0
+0
+0
+You make it away using less fuel than you thought you needed. Phew, that was a close one. 
+Fly straight towards the center of the planet, what's the worst that could happen!?
+-5
+-10
+-5
+-40
+You fly straight into the planet finding out it's a gas giant. While luckily you didn't crash, the gases severely damaged your ship. 
+You devise a plan that will let you slingshot around the planet using its gravitational field to your advantage. It looks like a pretty solid plan. 
+0
+0
+0
+0
+Your plan works perfectly, you use next to no fuel and spare your ship from any harm that might have befallen it otherwise. 
