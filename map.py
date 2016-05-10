@@ -257,9 +257,6 @@ class FinalMap (Map):
     endingFile = open("endings.txt","r")
     endings = endingFile.readlines()
     endingFile.close()
-    
-    def youMadeIt(self, ship):
-        print("Great job. You and the " + ship.getName() + "\n")
 
     def populateTiles(self, ship):
         import random
@@ -469,14 +466,31 @@ def load():
     print()
         
     return ship
-        
+
+def cheatCode(ship):
+    cheatInput = input("\nWould you like to use a cheat? (y/n): \n")
+    while "y" not in cheatInput or "n" not in cheatInput: 
+        if "y" in cheatInput:
+            ship.increaseFuel(500)
+            break
+        elif "n" in cheatInput:
+            break 
+        else:
+            print("Sorry, that's not a valid input.")
+            cheatInput = input("Would you like to use a cheat? (y/n): \n")
+            
 def main():
-    ##text.displayIntro()
+    
+    text.displayIntro()
+    
+    text.displayStory()
     
     ship = load()
     if ship == None:
         ship = ShipClass.Ship(input("What would you like to name your ship:\n"))
     print(ship)
+
+    cheatCode(ship)
     
     numSpace = 8
 

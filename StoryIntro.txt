@@ -1,57 +1,21 @@
-You can't live here anymore. The planet has sustained a massive natural
-disaster caused by a large asteroid. Many members of your species have
-succumbed to its affects. Luckily, you managed to bunker down in your 
-ship and leave with everything intact. You believe, quite rightly, that 
-you may be the sole survivor of your species and head out on a journey 
-fueled by a well-known trasmission received and broadcasted by your 
-species' officials several weeks before the incident. You have saved it
-to a small data storage device roughly the size of your thumb and have
-uploaded it to your ship's onboard computer. 
 
-The transmission displays as following:
+You can't live here anymore. Your home planet has recently sustained a massive natural disaster caused by a large asteroid. Many members of your species have succumbed to its affects. Luckily, you managed to bunker down in your ship and leave with everything intact. $You believe, quite rightly, that you may be the sole survivor of your species and head out on a journey fueled by a well-known transmission received and broadcasted by your species' officials several weeks before the incident. You have saved it to a small data storage device roughly the size of your thumb and have uploaded it to your ship's onboard computer. 
 
-|.|-------------------------------------------------------------|.|
-|.|-------------------------------------------------------------|.|                                                                                                       
-|.|----------------------------,:-------------------------------|.|                                                
-|.|--------------------------'@@@@@.----------------------------|.|                                             
-|.|-------------------------,@@@@@@@.---------------------------|.|                                            
-|.|-------------------------@@@@@@@@@---------------------------|.|                                            
-|.|------------------------:@@@@@@@@@---------------------------|.|                                            
-|.|------------------------@@@@@@@@@@,--------------------------|.|                                           
-|.|------------------------@@@@@@@@@@'--------------------------|.|                                           
-|.|------------------------'        :@--------------------------|.|                                           
-|.|-----------------------:,        `@--------------------------|.|                                           
-|.|-----------------------#`        `@--------------------------|.|                                           
-|.|-----------------------@+,`      .@`-------------------------|.|                                          
-|.|-----------------------@@@@@@@@@@@@+-------------------------|.|                                          
-|.|----------------------`@@@@@@@@@@@@@-------------------------|.|                                          
-|.|----------------------+@@@@@@@@@@@@@-------------------------|.|                                          
-|.|---------------------+@@@@@@@@@@@@@@@#.----------------------|.|                                       
-|.|------------------:@@@@@@@@@@@@@@@@@@@@@@#.------------------|.|                                   
-|.|---------------`@@@@@@@@@@@@@@@@@@@@@@@@@@@@+----------------|.|                                 
-|.|-------------.@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@---------------|.|                                
-|.|------------#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@--------------|.|                               
-|.|-----------@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-------------|.|                              
-|.|----------@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@------------|.|                             
-|.|---------@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@`----------|.|                           
-|.|--------@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@----------|.|                           
-|.|-------@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@---------|.|                          
-|.|------+@@@@@@@@@@@@@@@@@@@@@@@.`       `@@@@@@@@@@@@#--------|.|                         
-|.|-----`@@@@@@@@@@@@@@@@@@@@@@@@@`       #@@@@@@@@@@@@@;-------|.|                        
-|.|-----@@@@@@@@@@@@@@@@@@@@@@@@@@@.     @@@@@@@@@@@@@@@@-------|.|                        
-|.|----;@@@@@@@@@@@@@@@@@@@@@@@@@@@@;   @@@@@@@@@@@@@@@@@@------|.|                       
-|.|----@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+,@@@@@@@@@@@@@@@@@@@------|.|                       
-|.|---.@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-----|.|                      
-|.|---#@@@@@@@@+`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'-`@@@@@@@@@-----|.|                      
-|.|---@@@@@@@@:--:@@@@@@@@@@@@@@'     #@   @@@@---#@@@@@@@@-----|.|                      
-|.|--@@@@@@@@-----@@@@@@@@@@@@@@'     +@   @@@.----.@@@@@@@@----|.|                      
-|.|---@@@@@@@@----#@@@@@@@@@@@@@#  `` #@:;+@@@----`@@@@@@@@-----|.|                      
-|.|---+@@@@@@@----.@@@@@@@@@@@@@@@@@@@@@@@@@@#----;@@@@@@@@-----|.|                      
-|.|----@@@@@@@#----@@@@@@@@@@@@@@     #@@@@@@`----@@@@@@@@,-----|.|                      
-|.|----,@@@@@@@'---@@@@@@@@@@@@@@     +@@@@@@----@@@@@@@@#------|.|                       
-|.|-----;@@@@@@@,--#@@@@@@@@@@@@@     @@@@@@@--`@@@@@@@@#-------|.|                        
-|.|------:@@@@@@@--:@@@@@@@@@@@@@@@@@@@@@@@@'--#@@@@@@@+--------|.| 
+The transmission displays as follows:
 
-Attached is metadata that you have analyzed revealing coordinates that 
-you believe is the origin of the transmission. You embark on a journey 
-to find where it came from.                        
+     I look up from Earth and try to see
+     The planets looking back at me.
+     I gaze at bright and distant stars
+     And search for Mercury, Venus, Mars.
+
+     I squint at the Milky Way way up high
+     And look for Jupiter in the sky.
+     Where are Saturn, Uranus, Neptune?
+     They're far away, high like the moon. 
+
+     A telescope would be the best
+     For spotting Pluto and the rest.
+     I look for planets in the sky
+     I look Beyond the System. 
+
+Attached is metadata that you have analyzed revealing coordinates that you believe is the origin of the transmission. You embark on a journey to find where it came from.                        

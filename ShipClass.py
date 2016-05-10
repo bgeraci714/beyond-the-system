@@ -1,7 +1,7 @@
 class Ship(object):
     """The general ship class that will be used throughout the game."""
     ## Define init
-    def __init__(self, name = "Ship", biomass = 20, hull = 100, fuel = 50):
+    def __init__(self, name = "Ship", biomass = 20, hull = 100, fuel = 100):
         self.__name = name
         self.__biomass = biomass
         self.__hull = hull
@@ -9,7 +9,6 @@ class Ship(object):
         self.__oxygen = 100
         self.__log = []
         
-
     ## Ship Getters
     def getName(self):
         return self.__name
@@ -22,16 +21,7 @@ class Ship(object):
     def getOxygen(self):
         return self.__oxygen
 
-    ## Ship Setters
-    def setname(self, newname):
-        self.__name = newname
-    def setbio(self, newbio):
-        self.__biomass = newbio
-    def setHull(self, newHull):
-        self.__hull = newHull
-    def setfuel(self, newFuel):
-        self.__fuel = newFuel
-
+    ## Useful methods for changing the fuel
     def decrementFuel(self):
         self.__fuel -= 1
     def increaseFuel(self, newFuel):
@@ -80,10 +70,3 @@ class Ship(object):
 
     def getLog(self):
         return self.__log
-
-##ship = Ship("Gurren Lagann")
-##print(ship)
-##resourceChanges = [1, -2, 0, 10]
-##ship.updateResources(resourceChanges)
-
-##print(ship)
