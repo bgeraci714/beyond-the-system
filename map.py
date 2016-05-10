@@ -36,19 +36,8 @@ class Map(object):
         self.grid[self.position[0]][self.position[1]] = self.charSym
 
     def displayMap(self):
-        import time
-
+        """Displays the map."""
         ## alternative method for displaying the map
-        """
-        print (" "+"-" * 2 * self.numCols)
-        for row in range (self.numRows):
-            print("|", end="")
-            for col in range (self.numCols):
-                print(self.grid[row][col], end=" ")
-            print("|")
-        print (" "+"-" * 2 * self.numCols)
-        """
-        
         mapDisplay = ""
         mapDisplay += " "+"-" * 2 * self.numCols + "\n"
         for row in range (self.numRows):
@@ -59,13 +48,6 @@ class Map(object):
         mapDisplay += " "+"-" * 2 * self.numCols
 
         print(mapDisplay)
-        """
-        k = 0
-        for i in mapDisplay:
-            if i == "\n":
-                print(k)
-            k += 1
-        """
         
     def setCharPosition(self, position = None):
         if position == None:
@@ -73,6 +55,7 @@ class Map(object):
         self.grid[position[0]][position[1]] = self.charSym
 
     def addBox(self, position = [1,1], length = 1):
+        """Adds tiles to a set position."""
         for i in range(length):
             for k in range(length):
                 if self.isValid(position):
@@ -89,6 +72,7 @@ class Map(object):
             
            
     def updateUnusedEncounters(self):
+        """Updates the unused encounters using the usedEncounters list."""
         Map.unusedEncounters = []
         for encounter in Map.encounters:
             if len(encounter) == 7:
@@ -151,6 +135,7 @@ class Map(object):
             self.tileList.append(tileInfo)
 
     def isValid(self, position):
+        """Checks if a given position is valid."""
         if position[0] < 0 or position[1] < 0:
             ##print("\nYou've reached the edge of the map. You can go no farther.")
             return False
@@ -269,7 +254,9 @@ class Map(object):
                     break
             except:
                 print("Sorry that's not a valid input.\n")
-        
+class FinalMap (Map):
+    def youMadeIt(self, ship):
+        print("Great job. You and the " + ship.getName() + "\n")
 
 class Galaxy (object):
     """A Collection of Maps"""
@@ -329,13 +316,15 @@ def initializeMap (mapRows = 5, mapCols = 5, numTiles = 5):
     mapNew.populateTiles(numTiles)
     return mapNew
 
-def clrScreen ():
-    import os
-    print("\n" * 40)
-    try:
-        os.system('cls')
-    except:
-        os.system('clear')
+def initializeFinalMap (mapRows = 5, mapCols = 5, numTiles = 5):
+    """Initializes a standard map"""
+    import random
+    mapNew = FinalMap(mapRows, mapCols, ">", 0, 0, " ")
+    for i in range(random.randint(0,16)):
+        randPosition = [random.randint(1,mapCols - 1), random.randint(1,mapRows - 1)]
+        mapNew.addBox(randPosition)
+    mapNew.populateTiles(numTiles)
+    return mapNew
 
 def runMap(mapObject, ship):
     """Couples together displaying and moving throughout the map"""

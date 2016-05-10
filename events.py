@@ -3,14 +3,14 @@
 import shelve
 import shelveMaker
 
-def printProperly(text, end = "\n"):
+def printProperly(text, printSpeed = 0.0,end = "\n"):
     """Prints 66 characters then starts looking to make a new line."""
     
     import time
     linePos = 0
     for letter in text:
         print(letter, end="")
-        time.sleep(.0)
+        time.sleep(printSpeed)
         linePos += 1
         
         ## probably had a long, don't want weird spacing if we did!
