@@ -52,6 +52,6 @@ The transmission displays as following:
 |.|-----;@@@@@@@,--#@@@@@@@@@@@@@     @@@@@@@--`@@@@@@@@#-------|.|                        
 |.|------:@@@@@@@--:@@@@@@@@@@@@@@@@@@@@@@@@'--#@@@@@@@+--------|.| 
 
-Attached is metadata that you have analyzed revealing coordinates that you 
-believe is the origin of the transmission. You embark on a journey to find 
-where it came from.                        
+Attached is metadata that you have analyzed revealing coordinates that 
+you believe is the origin of the transmission. You embark on a journey 
+to find where it came from.                        
