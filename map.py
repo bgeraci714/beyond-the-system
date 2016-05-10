@@ -334,10 +334,7 @@ class FinalMap (Map):
         self.changeTile(self.position, self.charSym)
         if move != "i" and FinalMap.foundEnding == False:
             ship.decrementFuel()
-            ship.shipStatus(fuel = True, oxygen = False, biomass = False, hull = False)
-    
-        
-        
+            ship.shipStatus(fuel = True, oxygen = False, biomass = False, hull = False)       
 
 class Galaxy (object):
     """A Collection of Maps"""
@@ -481,7 +478,7 @@ def main():
         ship = ShipClass.Ship(input("What would you like to name your ship:\n"))
     print(ship)
     
-    numSpace = howMuchSpace()
+    numSpace = 8
 
     galaxy = Galaxy(numSpace, ship)
     galaxy.play(ship)
