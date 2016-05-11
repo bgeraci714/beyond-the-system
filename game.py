@@ -374,8 +374,7 @@ class Galaxy (object):
     def play(self, ship):
         """Standard play function for the game."""
         mapCounter = 0
-        print("self.numMaps = " + str(self.numMaps))
-        print("length of the log = " + str(len(ship.getLog())))
+        
         ## allows you to iterate through the list of maps using foundDoor as a flag
         while mapCounter < self.numMaps and self.notDeadYet(ship) and not self.maps[mapCounter].foundEnding:
             runMap(self.maps[mapCounter], ship)
