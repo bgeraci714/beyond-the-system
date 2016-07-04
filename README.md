@@ -1,7 +1,5 @@
 # beyond-the-system
 
-To get the game to run, all you need to do is run game.py and the rest is taken care of. 
-
 
 Beyond the System is a procedurally generated space exploration game meant to serve as the final project for our programming fundamentals class created by Blake Geraci and Ashley Hartzler.
 
@@ -26,4 +24,8 @@ The game can be broken down into several key components.
   3b. You got lost and died in space. 
   
   3c. You landed on the earth but didn't get the key information you needed for a happy ending. 
+  
+#How to Play:
+
+To play the game, all you need to do is run game.py and the rest is taken care of. 
   
