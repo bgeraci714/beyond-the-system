@@ -15,7 +15,7 @@ The game can be broken down into several key components.
 
   2a. Procedural generation of sections of space with different events per square per map
 
-  2b. Semi-randomized events to provide diversity of gameplay with over 20+ events to encounter. 
+  2b. Semi-randomized events to provide diversity of gameplay with 20+ events to encounter. 
         
   2c. Survival aspects that place greater emphasis on choices in events.
   
