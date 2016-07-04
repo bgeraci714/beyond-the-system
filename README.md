@@ -15,15 +15,15 @@ The game can be broken down into several key components.
 
   2a. Procedural generation of sections of space with different events per square per map
 
-  2b. Semi-randomized events to provide diversity of gameplay (not sure how many we want here, 15+?)
+  2b. Semi-randomized events to provide diversity of gameplay with over 20+ events to encounter. 
         
-  2c. Survival aspects that place greater emphasis on choices in events
+  2c. Survival aspects that place greater emphasis on choices in events.
   
 3. The ending of the game.
 
-  3a. You made it to Earth ("Hooray!")
+  3a. You made it to Earth. 
   
-  3b. You got lost and died in space ("Awww")
+  3b. You got lost and died in space. 
   
   3c. You landed on the earth but didn't get the key information you needed for a happy ending. 
   
